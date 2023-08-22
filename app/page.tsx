@@ -1,6 +1,6 @@
 'use client'
 
-import Widget from '@/components/Widget'
+import Widget from '@/app/components/Widget'
 import { Chart, Line, Point, Tooltip } from 'bizcharts'
 
 const data = [

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Container from './Container'
 
 const Header = () => {
@@ -12,7 +13,7 @@ const Header = () => {
                   className="border-r border-gray-300 pr-4 font-semibold"
                   aria-current="page"
                 >
-                  GitHub Trending Insight
+                  <Link href={'/'}>GitHub Trending Insight</Link>
                 </div>
               </div>
             </div>
