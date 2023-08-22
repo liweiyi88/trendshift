@@ -151,43 +151,39 @@ const scale = {
 
 const Home = () => {
   return (
-    <main className="bg-gray-50 min-h-screen pt-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Widget className="col-span-2 h-[402px]">
-            <Chart
-              scale={scale}
-              padding={[30, 20, 60, 40]}
-              autoFit
-              data={data}
-              interactions={['element-active']}
-            >
-              <Point position="month*count" color="tag" shape="circle" />
-              <Line
-                shape="smooth"
-                position="month*count"
-                color="tag"
-                label="count"
-              />
-              <Tooltip
-                shared
-                showCrosshairs
-                region={null}
-                g2-tooltip-list-item={{ display: 'flex' }}
-              />
-            </Chart>
-          </Widget>
-          <Widget className="" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-          <Widget className="h-52" />
-        </div>
-      </div>
-    </main>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <Widget className="col-span-2 h-[402px]">
+        <Chart
+          scale={scale}
+          padding={[30, 20, 60, 40]}
+          autoFit
+          data={data}
+          interactions={['element-active']}
+        >
+          <Point position="month*count" color="tag" shape="circle" />
+          <Line
+            shape="smooth"
+            position="month*count"
+            color="tag"
+            label="count"
+          />
+          <Tooltip
+            shared
+            showCrosshairs
+            region={null}
+            g2-tooltip-list-item={{ display: 'flex' }}
+          />
+        </Chart>
+      </Widget>
+      <Widget className="" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+      <Widget className="h-52" />
+    </div>
   )
 }
 

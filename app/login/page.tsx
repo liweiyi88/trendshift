@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 
 interface LoginRequest {
   username: string
@@ -25,14 +26,18 @@ const login = async (data: LoginRequest) => {
 const Login = () => {
   const { register, handleSubmit } = useForm<LoginRequest>()
 
+  const router = useRouter()
+
   const onSubmit: SubmitHandler<LoginRequest> = async (data) => {
     await login(data)
+
+    router.refresh()
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Log in to your account
         </h2>
       </div>

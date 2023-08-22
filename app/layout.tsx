@@ -1,6 +1,7 @@
 import './globals.css'
 import Header from '@/app/components/Header'
 import type { Metadata } from 'next'
+import Container from './components/Container'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -29,7 +30,9 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      {children}
+      <Container className="bg-gray-50 pt-24 min-h-screen">
+        {children}
+      </Container>
     </>
   )
 }
