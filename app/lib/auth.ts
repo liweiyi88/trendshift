@@ -1,11 +1,20 @@
-import { cookies } from 'next/headers'
+import { config } from './config'
 
-export const config = {
-  jwtCookie: 'gti_access_token',
+export interface LoginRequest {
+  username: string
+  password: string
 }
 
-export const authenticated = async () => {
-  const cookieStore = cookies()
+export const login = async (data: LoginRequest) => {
+  const res = await fetch(`${config.apiHost}/login`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    credentials: 'include',
+  })
 
-  return !!cookieStore.get(config.jwtCookie)
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`)
+  }
+
+  return res.json()
 }

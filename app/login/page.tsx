@@ -3,25 +3,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-
-interface LoginRequest {
-  username: string
-  password: string
-}
-
-const login = async (data: LoginRequest) => {
-  const res = await fetch('http://localhost:8080/login', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    credentials: 'include',
-  })
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! status: ${res.status}`)
-  }
-
-  return res.json()
-}
+import { LoginRequest, login } from '../lib/auth'
 
 const Login = () => {
   const { register, handleSubmit } = useForm<LoginRequest>()
