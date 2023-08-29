@@ -3,24 +3,21 @@
 import React, { useState, useRef, useEffect, forwardRef } from 'react'
 import CreatableSelect from 'react-select/creatable'
 import { v4 } from 'uuid'
-import { Repository } from '@/app/lib/repository'
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-]
+import { Repository, Tag } from '@/app/lib/repository'
 
 interface Props {
   repository: Repository
+  tags: Tag[]
 }
 
 interface TagItemProps {
   isEditing: boolean
+  tags: Tag[]
+  selectedTags: Tag[]
 }
 
 const TagItem = forwardRef<HTMLDivElement | null, TagItemProps>(
-  ({ isEditing }, ref) => {
+  ({ isEditing, tags, selectedTags }, ref) => {
     if (isEditing) {
       return (
         <div ref={ref}>
@@ -33,9 +30,13 @@ const TagItem = forwardRef<HTMLDivElement | null, TagItemProps>(
               //@TODO: create the tag.
               console.log(input)
             }}
-            defaultValue={[options[2], options[0]]}
+            defaultValue={selectedTags.map((tag) => {
+              return { value: String(tag.id), label: tag.name }
+            })}
             isMulti
-            options={options}
+            options={tags.map((tag) => {
+              return { value: String(tag.id), label: tag.name }
+            })}
             theme={(theme) => ({
               ...theme,
               borderRadius: 0,
@@ -93,8 +94,13 @@ const TagItem = forwardRef<HTMLDivElement | null, TagItemProps>(
 
 TagItem.displayName = 'TagItem'
 
-const RepositoryCard = ({ repository }: Props) => {
+const RepositoryCard = ({ repository, tags }: Props) => {
   const [isEditing, setEditing] = useState(false)
+  const [prevTags, setPrevTags] = useState(tags)
+
+  if (tags !== prevTags) {
+    setPrevTags(tags)
+  }
 
   const tagRef = useRef<HTMLDivElement>(null)
 
@@ -117,33 +123,39 @@ const RepositoryCard = ({ repository }: Props) => {
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-6">
-      <div className="mb-4 flex justify-between">
+      <div className="mb-4 flex justify-between items-center">
         <div className="">
-          <span className="text-base font-semibold text-blue-400">
-            {repository.full_name}
-          </span>
+          <span className="text-sm text-blue-400">{repository.full_name}</span>
         </div>
-        <div className="text-base text-gray-500">Python</div>
+        <div className="text-xs text-gray-400">{repository.language}</div>
       </div>
       <div className="mt-3">
         {!isEditing && (
           <div
-            className="flex space-x-2 text-xs hover:bg-gray-50 hover:cursor-pointer py-1"
+            className="flex space-x-2 text-xs hover:bg-gray-50 hover:cursor-pointer py-1 "
             onClick={() => {
               setEditing(true)
             }}
           >
-            {repository.tags &&
+            {repository.tags ? (
               repository.tags.map((tag) => {
                 return (
                   <div className="bg-gray-200 px-2 py-1" key={v4()}>
                     {tag.name}
                   </div>
                 )
-              })}
+              })
+            ) : (
+              <div className="py-1">+ Add tags</div>
+            )}
           </div>
         )}
-        <TagItem isEditing={isEditing} ref={tagRef} />
+        <TagItem
+          isEditing={isEditing}
+          ref={tagRef}
+          tags={prevTags}
+          selectedTags={repository.tags}
+        />
       </div>
     </div>
   )
