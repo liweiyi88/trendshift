@@ -1,9 +1,5 @@
 import { config } from './config'
-
-export interface Tag {
-  id: number
-  name: string
-}
+import { Tag } from './tag'
 
 export interface Repository {
   repository_id: number
@@ -23,19 +19,6 @@ export interface Repository {
 
 export const getRepositories = async (): Promise<Repository[]> => {
   const res = await fetch(`${config.apiHost}/api/repositories`, {
-    method: 'GET',
-    credentials: 'include',
-  })
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! status: ${res.status}`)
-  }
-
-  return res.json()
-}
-
-export const getTags = async (): Promise<Tag[]> => {
-  const res = await fetch(`${config.apiHost}/api/tags`, {
     method: 'GET',
     credentials: 'include',
   })

@@ -1,5 +1,6 @@
 import RepositoryCard from '@/app/components/RepositoryCard'
-import { getRepositories, getTags } from '@/app/lib/repository'
+import { getRepositories } from '@/app/lib/repository'
+import { getTags } from '@/app/lib/tag'
 import React from 'react'
 
 const Repository = async () => {
