@@ -1,45 +1,178 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useReducer } from 'react'
 import CreatableSelect from 'react-select/creatable'
 import { v4 } from 'uuid'
 import { Repository } from '@/app/lib/repository'
+import { useTagContext } from './context/useTagContext'
 import { Tag } from '../lib/tag'
 
 interface Props {
   repository: Repository
+}
+
+interface State {
+  isEditing: boolean
+  isAdding: boolean
+  prevRepository: Repository
+  tagChanged: boolean
+  isUpdating: boolean
+}
+
+type Action =
+  | { type: 'editing' }
+  | { type: 'edited' }
+  | { type: 'adding' }
+  | { type: 'added' }
+  | { type: 'updateTags'; tags: Tag[] }
+  | { type: 'createTag'; tag: Tag }
+  | { type: 'updating' }
+  | { type: 'updated' }
+
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'editing': {
+      return {
+        ...state,
+        isEditing: true,
+      }
+    }
+    case 'edited': {
+      return {
+        ...state,
+        isEditing: false,
+      }
+    }
+    case 'adding': {
+      return {
+        ...state,
+        isAdding: true,
+      }
+    }
+    case 'added': {
+      return {
+        ...state,
+        isAdding: false,
+      }
+    }
+    case 'updateTags': {
+      return {
+        ...state,
+        tagChanged: true,
+        prevRepository: {
+          ...state.prevRepository,
+          tags: [...action.tags],
+        },
+      }
+    }
+    case 'createTag': {
+      return {
+        ...state,
+        prevRepository: {
+          ...state.prevRepository,
+          tags: [...state.prevRepository.tags, action.tag],
+        },
+      }
+    }
+    case 'updating': {
+      return {
+        ...state,
+        isUpdating: true,
+      }
+    }
+    case 'updated': {
+      return {
+        ...state,
+        isUpdating: false,
+        tagChanged: false,
+      }
+    }
+    default: {
+      throw Error('Unknown action')
+    }
+  }
+}
+
+interface TagsBarProps {
+  isUpdating: boolean
   tags: Tag[]
 }
 
-const RepositoryCard = ({ repository, tags }: Props) => {
-  const [isEditing, setEditing] = useState(false)
-  const [isAdding, setIsAdding] = useState(false)
-  const [prevTags, setPrevTags] = useState<Tag[]>(tags)
-  const [prevRepository, setPrevRepository] = useState<Repository>(repository)
+const TagsBar = ({ isUpdating, tags }: TagsBarProps) => {
+  if (isUpdating) {
+    return <div>updating...</div>
+  }
+
+  if (tags.length > 0) {
+    return tags.map((tag) => {
+      return (
+        <div className="bg-gray-200 px-2 py-1" key={v4()}>
+          {tag.name}
+        </div>
+      )
+    })
+  }
+
+  return <div className="py-1">+ Add tags</div>
+}
+
+const RepositoryCard = ({ repository }: Props) => {
+  const [
+    { isAdding, isEditing, tagChanged, prevRepository, isUpdating },
+    dispatch,
+  ] = useReducer(reducer, {
+    isEditing: false,
+    isAdding: false,
+    prevRepository: repository,
+    tagChanged: false,
+    isUpdating: false,
+  })
+
+  const { tags, setTags } = useTagContext()
 
   const tagRef = useRef<HTMLDivElement>(null)
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (tagRef.current && tagRef.current.contains(event.target as Node)) {
-      return
+  useEffect(() => {
+    const handleClickOutside = async (event: MouseEvent) => {
+      if (tagRef.current && tagRef.current.contains(event.target as Node)) {
+        return
+      }
+
+      if (isEditing) {
+        dispatch({
+          type: 'edited',
+        })
+      }
+
+      if (tagChanged) {
+        dispatch({
+          type: 'updating',
+        })
+
+        fetch(`/api/repositories/${prevRepository.repository_id}`, {
+          method: 'PUT',
+          body: JSON.stringify([...prevRepository.tags]),
+        })
+          .catch((e) => {
+            console.log('fdsfd', e)
+          })
+          .finally(() => {
+            dispatch({
+              type: 'updated',
+            })
+          })
+      }
     }
 
-    setEditing(false)
-    // save tags
-  }
-
-  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [tagRef])
-
-  console.log(prevRepository)
+  }, [prevRepository.repository_id, prevRepository.tags, tagChanged, isEditing])
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 px-4 py-6">
+    <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="mb-4 flex justify-between items-center">
         <div className="">
           <span className="text-sm text-blue-400">
@@ -57,19 +190,17 @@ const RepositoryCard = ({ repository, tags }: Props) => {
                   return { name: option.label, id: Number(option.value) }
                 })
 
-                setPrevRepository((prevRepository) => {
-                  return {
-                    ...prevRepository,
-                    tags: [...updatedTags],
-                  }
+                dispatch({
+                  type: 'updateTags',
+                  tags: updatedTags,
                 })
-
-                //@TODO: update current repository with tags.
               }}
               isDisabled={isAdding}
               isLoading={isAdding}
               onCreateOption={async (input) => {
-                setIsAdding(true)
+                dispatch({
+                  type: 'adding',
+                })
                 try {
                   const res = await fetch('/api/tags', {
                     method: 'POST',
@@ -77,24 +208,30 @@ const RepositoryCard = ({ repository, tags }: Props) => {
                   })
 
                   const tag = await res.json()
-                  setPrevTags((prevTags) => [...prevTags, tag])
-                  setPrevRepository((prevRepository) => {
-                    return {
-                      ...prevRepository,
-                      tags: [...prevRepository.tags, tag],
-                    }
+                  setTags((prevTags) => [...prevTags, tag])
+
+                  dispatch({
+                    type: 'createTag',
+                    tag,
+                  })
+
+                  dispatch({
+                    type: 'updateTags',
+                    tags: [...prevRepository.tags, tag],
                   })
                 } catch (e) {
                   console.error(e)
                 } finally {
-                  setIsAdding(false)
+                  dispatch({
+                    type: 'added',
+                  })
                 }
               }}
               value={prevRepository.tags.map((tag) => {
                 return { value: String(tag.id), label: tag.name }
               })}
               isMulti
-              options={prevTags.map((tag) => {
+              options={tags.map((tag) => {
                 return { value: String(tag.id), label: tag.name }
               })}
               theme={(theme) => ({
@@ -152,20 +289,12 @@ const RepositoryCard = ({ repository, tags }: Props) => {
           <div
             className="flex space-x-2 text-xs hover:bg-gray-50 hover:cursor-pointer py-1 "
             onClick={() => {
-              setEditing(true)
+              dispatch({
+                type: 'editing',
+              })
             }}
           >
-            {prevRepository.tags.length > 0 ? (
-              prevRepository.tags.map((tag) => {
-                return (
-                  <div className="bg-gray-200 px-2 py-1" key={v4()}>
-                    {tag.name}
-                  </div>
-                )
-              })
-            ) : (
-              <div className="py-1">+ Add tags</div>
-            )}
+            <TagsBar tags={prevRepository.tags} isUpdating={isUpdating} />
           </div>
         )}
       </div>

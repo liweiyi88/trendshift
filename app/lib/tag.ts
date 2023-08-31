@@ -9,6 +9,7 @@ export const getTags = async (): Promise<Tag[]> => {
   const res = await fetch(`${config.apiHost}/api/tags`, {
     method: 'GET',
     credentials: 'include',
+    cache: 'no-store',
   })
 
   if (!res.ok) {

@@ -1,24 +1,13 @@
-import RepositoryCard from '@/app/components/RepositoryCard'
+import RepositoryList from '@/app/components/RepositoryList'
 import { getRepositories } from '@/app/lib/repository'
 import { getTags } from '@/app/lib/tag'
 import React from 'react'
 
-const Repository = async () => {
+const RepositoryPage = async () => {
   const repositories = await getRepositories()
   const tags = await getTags()
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {repositories &&
-        repositories.map((repository) => (
-          <RepositoryCard
-            key={repository.repository_id}
-            repository={repository}
-            tags={tags}
-          />
-        ))}
-    </div>
-  )
+  return <RepositoryList repositories={repositories} tags={tags} />
 }
 
-export default Repository
+export default RepositoryPage

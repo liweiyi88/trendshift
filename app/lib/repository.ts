@@ -21,6 +21,7 @@ export const getRepositories = async (): Promise<Repository[]> => {
   const res = await fetch(`${config.apiHost}/api/repositories`, {
     method: 'GET',
     credentials: 'include',
+    cache: 'no-store',
   })
 
   if (!res.ok) {
