@@ -6,6 +6,7 @@ import { v4 } from 'uuid'
 import { Repository } from '@/app/lib/repository'
 import { useTagContext } from './context/useTagContext'
 import { Tag } from '../lib/tag'
+import Link from 'next/link'
 
 interface Props {
   repository: Repository
@@ -176,7 +177,12 @@ const RepositoryCard = ({ repository }: Props) => {
       <div className="mb-4 flex justify-between items-center">
         <div className="">
           <span className="text-sm text-blue-400">
-            {prevRepository.full_name}
+            <Link
+              href={`https://github.com/${prevRepository.full_name}`}
+              target="_blank"
+            >
+              {prevRepository.full_name}
+            </Link>
           </span>
         </div>
         <div className="text-xs text-gray-400">{prevRepository.language}</div>
