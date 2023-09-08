@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const authenticated = async () => {
+const authenticated = async () => {
   const cookieStore = cookies()
 
   return !!cookieStore.get(config.jwtCookie)
