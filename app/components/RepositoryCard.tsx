@@ -155,7 +155,7 @@ const RepositoryCard = ({ repository }: Props) => {
           body: JSON.stringify([...prevRepository.tags]),
         })
           .catch((e) => {
-            console.log('fdsfd', e)
+            console.log(e)
           })
           .finally(() => {
             dispatch({
