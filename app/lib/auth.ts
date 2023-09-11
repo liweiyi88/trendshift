@@ -1,6 +1,6 @@
 'use server'
 
-import { config } from './config'
+import { config, routes } from './config'
 import { cookies } from 'next/headers'
 
 interface TokenResponse {
@@ -14,7 +14,7 @@ export const login = async (formData: FormData) => {
     password: formData.get('password'),
   }
 
-  const res = await fetch(`${config.apiHost}/login`, {
+  const res = await fetch(`${config.apiHost}${routes.login}`, {
     method: 'POST',
     body: JSON.stringify(request),
     cache: 'no-store',

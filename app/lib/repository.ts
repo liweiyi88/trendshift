@@ -17,8 +17,17 @@ export interface Repository {
   updated_at: string
 }
 
-export const getRepositories = async (): Promise<Repository[]> => {
-  const res = await fetch(`${config.apiHost}/api/repositories`, {
+type Filter = 'today' | 'all'
+
+export const getRepositories = async (
+  filter: Filter,
+): Promise<Repository[]> => {
+  const query =
+    filter === 'today'
+      ? `${config.apiHost}/api/repositories?q=${filter}`
+      : `${config.apiHost}/api/repositories`
+
+  const res = await fetch(query, {
     method: 'GET',
     credentials: 'include',
     cache: 'no-store',
