@@ -7,6 +7,9 @@ import { Repository } from '@/app/lib/repository'
 import { useTagContext } from './context/useTagContext'
 import { Tag } from '../lib/tag'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   repository: Repository
@@ -172,6 +175,9 @@ const RepositoryCard = ({ repository }: Props) => {
     }
   }, [prevRepository.repository_id, prevRepository.tags, tagChanged, isEditing])
 
+  const path = usePathname()
+  const router = useRouter()
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="mb-4 flex justify-between items-center">
@@ -187,7 +193,7 @@ const RepositoryCard = ({ repository }: Props) => {
         </div>
         <div className="text-xs text-gray-400">{prevRepository.language}</div>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 border-b mb-4">
         {isEditing && (
           <div ref={tagRef}>
             <CreatableSelect
@@ -304,6 +310,16 @@ const RepositoryCard = ({ repository }: Props) => {
           </div>
         )}
       </div>
+
+      <button
+        className="text-blue-500 text-xs font-semibold rounded hover:underline"
+        onClick={() => {
+          router.push(`${path}?ask-ai=true`)
+        }}
+      >
+        <span className="pr-1">Ask AI</span>
+        <FontAwesomeIcon icon={faBoltLightning} className="text-yellow-400" />
+      </button>
     </div>
   )
 }

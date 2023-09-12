@@ -29,7 +29,7 @@ const RepositoryTab = ({ active }: Props) => {
           }}
           id="tabs"
           name="tabs"
-          className="text-sm block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2 border"
+          className="text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-2 border"
         >
           <option value="today">Today</option>
           <option value="all">All</option>
