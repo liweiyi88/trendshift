@@ -1,4 +1,5 @@
 import './globals.css'
+import '@fortawesome/fontawesome-svg-core/styles.css' // has to import the css to resolve the large icon when first load.
 import Header from '@/app/components/Header'
 import type { Metadata } from 'next'
 import Container from './components/Container'

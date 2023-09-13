@@ -30,12 +30,13 @@ const RepositoryList = ({ tags, repositories }: Props) => {
 
   return (
     <>
-      <div className="flex items-center mb-6 space-x-2 border-b pb-4">
-        <div className="mr-8">
+      <div className="block md:flex items-center mb-6 md:space-x-2 border-b pb-4">
+        <div className="mr-8 mb-4 md:mb-0">
           <RepositoryTab
             active={filter && filter === 'all' ? 'all' : 'today'}
           />
         </div>
+
         <Toggle
           enabled={toggle}
           text="Only show untagged"
@@ -43,11 +44,14 @@ const RepositoryList = ({ tags, repositories }: Props) => {
             setToggle(!toggle)
           }}
         />
-        <div className="text-sm text-gray-500 border-r pr-2">
+        <span className="text-sm text-gray-500 border-r pr-2 pl-2 md:pl-0">
           Only show untagged
-        </div>
-        <div className="text-sm text-gray-500">{repos.length} repositories</div>
+        </span>
+        <span className="text-sm text-gray-500 pl-2 md:pl-0">
+          {repos.length} repositories
+        </span>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <TagContextProvider tags={tags}>
           {repos &&
