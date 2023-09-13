@@ -9,7 +9,6 @@ import { BackTop } from './BackTop'
 import RepositoryTab from './RepositoryTab'
 import Toggle from './Toggle'
 import { useSearchParams } from 'next/navigation'
-import AskAIModal from './AskAIModal'
 
 interface Props {
   tags: Tag[]
@@ -22,9 +21,6 @@ const RepositoryList = ({ tags, repositories }: Props) => {
   const searchParams = useSearchParams()
 
   const filter = searchParams.get('q')
-  const askAi = searchParams.get('ask-ai')
-
-  console.log(askAi)
 
   const repos = toggle
     ? repositories.filter((repo) => {
@@ -64,9 +60,6 @@ const RepositoryList = ({ tags, repositories }: Props) => {
         </TagContextProvider>
       </div>
       <BackTop />
-      {askAi && (
-        <AskAIModal tags={tags} id={123} fullName="liweiyi88/onedump" />
-      )}
     </>
   )
 }

@@ -22,7 +22,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          {path !== routes.repository && (
+          {!path.startsWith(routes.repository) && (
             <div>
               <Link
                 href={routes.repository}

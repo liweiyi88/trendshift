@@ -7,7 +7,6 @@ import { Repository } from '@/app/lib/repository'
 import { useTagContext } from './context/useTagContext'
 import { Tag } from '../lib/tag'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 
@@ -175,9 +174,6 @@ const RepositoryCard = ({ repository }: Props) => {
     }
   }, [prevRepository.repository_id, prevRepository.tags, tagChanged, isEditing])
 
-  const path = usePathname()
-  const router = useRouter()
-
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="mb-4 flex justify-between items-center">
@@ -311,15 +307,13 @@ const RepositoryCard = ({ repository }: Props) => {
         )}
       </div>
 
-      <button
+      <Link
+        href={`/repository/ask-ai/${repository.id}?name=${repository.full_name}`}
         className="text-blue-500 text-xs font-semibold rounded hover:underline"
-        onClick={() => {
-          router.push(`${path}?ask-ai=true`)
-        }}
       >
         <span className="pr-1">Ask AI</span>
         <FontAwesomeIcon icon={faBoltLightning} className="text-yellow-400" />
-      </button>
+      </Link>
     </div>
   )
 }

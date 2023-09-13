@@ -5,6 +5,8 @@ export interface Repository {
   repository_id: number
   id: number
   full_name: string
+  description: string
+  default_branch: string
   owner: {
     login: string
     avatar_url: string
@@ -26,6 +28,24 @@ export const getRepositories = async (
     filter === 'today'
       ? `${config.apiHost}/api/repositories?q=${filter}`
       : `${config.apiHost}/api/repositories`
+
+  const res = await fetch(query, {
+    method: 'GET',
+    credentials: 'include',
+    cache: 'no-store',
+  })
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`)
+  }
+
+  return res.json()
+}
+
+export const getRepository = async (fullName: string): Promise<Repository> => {
+  const query = `${config.apiHost}/api/repositories/${encodeURIComponent(
+    fullName,
+  )}`
 
   const res = await fetch(query, {
     method: 'GET',
