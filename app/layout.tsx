@@ -31,7 +31,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <Container className="bg-gray-50 pt-24 min-h-screen">
+      <Container className="bg-gray-50/40 pt-24 min-h-screen">
         {children}
       </Container>
     </>

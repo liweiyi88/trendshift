@@ -1,13 +1,19 @@
 import { config } from './config'
 
-export interface DailyStats {
+export interface TrandingTopicStats {
   trend_date: string
   name: string
   count: number
 }
 
-export const fetchDailyStats = async (): Promise<DailyStats[]> => {
-  const res = await fetch(`${config.apiHost}/api/stats/daily`, {
+export const fetchTrendingTopicStats = async (
+  range: string | null,
+): Promise<TrandingTopicStats[]> => {
+  const url = range
+    ? `${config.apiHost}/api/stats/trending-topics?range=${range}`
+    : `${config.apiHost}/api/stats/trending-topics`
+
+  const res = await fetch(url, {
     method: 'GET',
     credentials: 'include',
     cache: 'no-store',
