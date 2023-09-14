@@ -309,6 +309,7 @@ const RepositoryCard = ({ repository }: Props) => {
 
       <Link
         href={`/repository/ask-ai/${repository.id}?name=${repository.full_name}`}
+        scroll={false}
         className="text-blue-500 text-xs font-semibold rounded hover:underline"
       >
         <span className="pr-1">Ask AI</span>
