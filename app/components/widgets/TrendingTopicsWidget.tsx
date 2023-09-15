@@ -4,7 +4,7 @@ import { TrandingTopicStats } from '@/app/lib/stats'
 import React from 'react'
 import Widget from '../Widget'
 import { Chart, Line, Point, Tooltip } from 'bizcharts'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 interface Props {
   stats: TrandingTopicStats[]
@@ -16,7 +16,6 @@ const scale = {
 
 const TrendingTopicsWidget = ({ stats }: Props) => {
   const searchParams = useSearchParams()
-  const path = usePathname()
   const router = useRouter()
 
   const range = searchParams.get('range') ?? 'all'
@@ -31,9 +30,12 @@ const TrendingTopicsWidget = ({ stats }: Props) => {
           onChange={(e) => {
             const range = e.target.value
             if (range !== 'all') {
-              router.push(`${path}/?range=${range}`)
+              const searchParams = new URLSearchParams({
+                range,
+              })
+              router.push(`?${searchParams.toString()}`)
             } else {
-              router.push(path)
+              router.push('?')
             }
           }}
         >
