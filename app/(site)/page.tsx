@@ -1,12 +1,9 @@
 import dayjs from 'dayjs'
-import TrendingTopicsWidget from './components/widgets/TrendingTopicsWidget'
-import { fetchTrendingTopicStats } from './lib/stats'
+import TrendingTopicsWidget from '../components/widgets/TrendingTopicsWidget'
+import { fetchTrendingTopicStats } from '../lib/stats'
+import { PageProps } from '../lib/page'
 
-const Home = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) => {
+const Home = async ({ searchParams }: PageProps<null>) => {
   const range = searchParams['range'] as string
   const trendingTopicsStats = await fetchTrendingTopicStats(range)
 

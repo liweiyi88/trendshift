@@ -1,9 +1,9 @@
 'use client'
 
+import { routes } from '@/app/lib/config'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { routes } from '../lib/config'
 
 type ActiveTab = 'today' | 'all'
 

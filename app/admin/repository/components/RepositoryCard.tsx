@@ -4,11 +4,12 @@ import React, { useRef, useEffect, useReducer } from 'react'
 import CreatableSelect from 'react-select/creatable'
 import { v4 } from 'uuid'
 import { Repository } from '@/app/lib/repository'
-import { useTagContext } from './context/useTagContext'
-import { Tag } from '../lib/tag'
+import { useTagContext } from '../../../components/context/useTagContext'
+import { Tag } from '../../../lib/tag'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
+import { routes } from '../../../lib/config'
 
 interface Props {
   repository: Repository
@@ -176,9 +177,9 @@ const RepositoryCard = ({ repository }: Props) => {
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
-      <div className="mb-4 flex justify-between items-center">
-        <div className="">
-          <span className="text-sm text-blue-400">
+      <div className="mb-6">
+        <div className="mb-2">
+          <span className="text-base text-blue-400">
             <Link
               href={`https://github.com/${prevRepository.full_name}`}
               target="_blank"
@@ -187,8 +188,26 @@ const RepositoryCard = ({ repository }: Props) => {
             </Link>
           </span>
         </div>
-        <div className="text-xs text-gray-400">{prevRepository.language}</div>
+        <div className="text-xs text-gray-400 flex justify-between items-center">
+          <Link
+            href={`${routes.repository}/ask-ai/${
+              repository.id
+            }?${new URLSearchParams({
+              name: repository.full_name,
+            }).toString()}`}
+            scroll={false}
+            className="text-blue-500 text-xs font-semibold rounded hover:underline mr-2"
+          >
+            <span className="pr-1">Ask AI</span>
+            <FontAwesomeIcon
+              icon={faBoltLightning}
+              className="text-yellow-400"
+            />
+          </Link>
+          <div>{prevRepository.language}</div>
+        </div>
       </div>
+
       <div className="mt-3 border-b mb-4">
         {isEditing && (
           <div ref={tagRef}>
@@ -307,14 +326,11 @@ const RepositoryCard = ({ repository }: Props) => {
         )}
       </div>
 
-      <Link
-        href={`/repository/ask-ai/${repository.id}?name=${repository.full_name}`}
-        scroll={false}
-        className="text-blue-500 text-xs font-semibold rounded hover:underline"
-      >
-        <span className="pr-1">Ask AI</span>
-        <FontAwesomeIcon icon={faBoltLightning} className="text-yellow-400" />
-      </Link>
+      {prevRepository.description && prevRepository.description !== '' && (
+        <div className="text-sm text-gray-400">
+          {prevRepository.description}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,16 +1,15 @@
-import AskAIModalButtons from '@/app/components/AskAIModalButtons'
+import AskAIModalButtons from '@/app/admin/repository/components/AskAIModalButtons'
 import GoBackButton from '@/app/components/GoBackButton'
 import { Modal } from '@/app/components/Modal'
+import { PageProps } from '@/app/lib/page'
 import { getRepository } from '@/app/lib/repository'
 import { getTags } from '@/app/lib/tag'
 import React from 'react'
 
-interface Props {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-const AskAIModal = async ({ params: { id }, searchParams }: Props) => {
+const AskAIModal = async ({
+  params: { id },
+  searchParams,
+}: PageProps<{ id: string }>) => {
   const tags = await getTags()
 
   const repositoryName = searchParams['name'] as string

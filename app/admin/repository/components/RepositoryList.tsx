@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Tag } from '../lib/tag'
-import { Repository } from '../lib/repository'
 import RepositoryCard from './RepositoryCard'
-import { TagContextProvider } from './context/useTagContext'
-import { BackTop } from './BackTop'
 import RepositoryTab from './RepositoryTab'
-import Toggle from './Toggle'
 import { useSearchParams } from 'next/navigation'
+import { Repository } from '@/app/lib/repository'
+import { Tag } from '@/app/lib/tag'
+import { TagContextProvider } from '@/app/components/context/useTagContext'
+import { BackTop } from '@/app/components/BackTop'
+import Toggle from '@/app/components/Toggle'
 
 interface Props {
   tags: Tag[]

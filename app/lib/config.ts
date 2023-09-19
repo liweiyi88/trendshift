@@ -4,6 +4,6 @@ export const config = {
 }
 
 export const routes = {
-  repository: '/repository',
+  repository: '/admin/repository',
   login: '/login',
 }
