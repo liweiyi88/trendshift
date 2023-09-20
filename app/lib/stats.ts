@@ -17,6 +17,9 @@ export const fetchTrendingTopicStats = async (
     method: 'GET',
     credentials: 'include',
     cache: 'no-store',
+    next: {
+      revalidate: 24 * 3600,
+    },
   })
 
   if (!res.ok) {

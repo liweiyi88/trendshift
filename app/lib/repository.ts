@@ -1,6 +1,11 @@
 import { config } from './config'
 import { Tag } from './tag'
 
+export interface Trending {
+  trend_date: string
+  rank: number
+}
+
 export interface Repository {
   repository_id: number
   id: number
@@ -11,6 +16,7 @@ export interface Repository {
     login: string
     avatar_url: string
   }
+  trendings: Trending[]
   forks: number
   watchers: number
   language: string
@@ -20,6 +26,38 @@ export interface Repository {
 }
 
 type Filter = 'today' | 'all'
+
+export const getTrendingRepositories = async (
+  range: string | null,
+  language: string | null,
+  limit: string | null,
+): Promise<Repository[]> => {
+  const url = new URLSearchParams()
+
+  if (range) {
+    url.append('range', range)
+  }
+
+  if (language) {
+    url.append('language', language)
+  }
+
+  limit ? url.append('limit', limit) : url.append('limit', '20')
+
+  const query = `${config.apiHost}/api/trending-repositories?${url.toString()}`
+  const res = await fetch(query, {
+    method: 'GET',
+    next: {
+      revalidate: 24 * 3600,
+    },
+  })
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`)
+  }
+
+  return res.json()
+}
 
 export const getRepositories = async (
   filter: Filter,

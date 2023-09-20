@@ -18,7 +18,7 @@ const TrendingTopicsWidget = ({ stats }: Props) => {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const range = searchParams.get('range') ?? 'all'
+  const range = searchParams.get('topic-range') ?? 'all'
 
   return (
     <>
@@ -31,11 +31,11 @@ const TrendingTopicsWidget = ({ stats }: Props) => {
             const range = e.target.value
             if (range !== 'all') {
               const searchParams = new URLSearchParams({
-                range,
+                'topic-range': range,
               })
-              router.push(`?${searchParams.toString()}`)
+              router.push(`?${searchParams.toString()}`, { scroll: false })
             } else {
-              router.push('?')
+              router.push('?', { scroll: false })
             }
           }}
         >

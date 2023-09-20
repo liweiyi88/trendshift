@@ -28,7 +28,7 @@ const Header = () => {
                 href={routes.repository}
                 className="px-4 py-2 bg-black rounded text-white text-sm"
               >
-                Manage tags
+                Admin Login
               </Link>
             </div>
           )}
