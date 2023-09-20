@@ -14,7 +14,7 @@ const TrendingRepositoryList = ({ repositories }: Props) => {
   return (
     <>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">
-        <div className="px-2 text-base font-medium mb-1 md:mb-0">
+        <div className="md:px-2 text-base font-medium mb-1 md:mb-0">
           Trending repositories
         </div>
         <div>

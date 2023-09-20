@@ -23,7 +23,9 @@ const TrendingTopicsWidget = ({ stats }: Props) => {
   return (
     <>
       <div className="inline-flex items-center text-base hover:cursor-pointer w-auto rounded">
-        <div className="px-2 text-base font-medium">Trending topics</div>
+        <div className="md:px-2 text-base font-medium mr-2 md:mr-0">
+          Trending topics
+        </div>
         <select
           className="text-xs bg-gray-100 px-1 py-1 rounded"
           value={range}

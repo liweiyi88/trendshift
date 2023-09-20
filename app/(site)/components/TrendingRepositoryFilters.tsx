@@ -64,7 +64,7 @@ const TrendingRepositoryFilters = () => {
         <option value="javascript">Javascript</option>
         <option value="go">Go</option>
         <option value="php">PHP</option>
-        <option value="java">Jave</option>
+        <option value="java">Java</option>
         <option value="typescript">Typescript</option>
         <option value="c#">C#</option>
         <option value="python">Python</option>
