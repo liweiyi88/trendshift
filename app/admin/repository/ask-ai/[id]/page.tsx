@@ -1,6 +1,6 @@
 import AskAIModalButtons from '@/app/admin/repository/components/AskAIModalButtons'
 import GoBackButton from '@/app/components/GoBackButton'
-import { PageProps } from '@/app/lib/page'
+import { PageProps } from '@/app/lib/pagetypes'
 import { getRepository } from '@/app/lib/repository'
 import { getTags } from '@/app/lib/tag'
 import React from 'react'

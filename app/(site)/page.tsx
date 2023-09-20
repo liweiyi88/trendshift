@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import TrendingTopicsWidget from '../components/widgets/TrendingTopicsWidget'
 import { fetchTrendingTopicStats } from '../lib/stats'
-import { PageProps } from '../lib/page'
+import { PageProps } from '../lib/pagetypes'
 import TrendingRepositoryList from './components/TrendingRepositoryList'
 import { getTrendingRepositories } from '../lib/repository'
 import Section from '../components/Section'
