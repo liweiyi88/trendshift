@@ -16,7 +16,6 @@ export const fetchTrendingTopicStats = async (
   const res = await fetch(url, {
     method: 'GET',
     credentials: 'include',
-    cache: 'no-store',
     next: {
       revalidate: 24 * 3600,
     },
