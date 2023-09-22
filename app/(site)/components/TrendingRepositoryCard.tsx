@@ -1,5 +1,7 @@
 import { getLanguageColor } from '@/app/lib/config'
 import { Repository, Trending } from '@/app/lib/repository'
+import uEmojiParser from 'universal-emoji-parser'
+
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -83,7 +85,9 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         </div>
       </div>
 
-      <div className="text-gray-500 text-xs">{repository.description}</div>
+      <div className="text-gray-500 text-xs">
+        {uEmojiParser.parseToUnicode(repository.description)}
+      </div>
     </div>
   )
 }

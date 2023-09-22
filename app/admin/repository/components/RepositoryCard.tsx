@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { routes } from '../../../lib/config'
+import uEmojiParser from 'universal-emoji-parser'
 
 interface Props {
   repository: Repository
@@ -328,7 +329,7 @@ const RepositoryCard = ({ repository }: Props) => {
 
       {prevRepository.description && prevRepository.description !== '' && (
         <div className="text-sm text-gray-400">
-          {prevRepository.description}
+          {uEmojiParser.parseToUnicode(prevRepository.description)}
         </div>
       )}
     </div>
