@@ -1,5 +1,7 @@
 import { getLanguageColor } from '@/app/lib/config'
 import { Repository, Trending } from '@/app/lib/repository'
+import uEmojiParser from 'universal-emoji-parser'
+
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,18 +22,18 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
-      <div className="flex justify-between items-center text-base mb-1">
+      <div className="md:flex md:justify-between md:items-center text-sm md:text-base mb-1">
         <Link
           href={`https://github.com/${repository.full_name}`}
           target="_blank"
         >
-          <div className="text-blue-400 font-medium hover:underline">
+          <div className="text-blue-400 font-medium hover:underline mb-1 md:mb-0">
             {repository.full_name}
           </div>
         </Link>
-        <div className="text-gray-500 flex items-center text-sm">
+        <div className="text-gray-500 flex items-center text-xs md:text-sm">
           <span
-            className="w-3 h-3 rounded-full mr-1"
+            className="w-2 h-2 md:w-3 md:h-3 rounded-full mr-1"
             style={{
               backgroundColor: languageColor,
             }}
@@ -83,7 +85,9 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         </div>
       </div>
 
-      <div className="text-gray-500 text-xs">{repository.description}</div>
+      <div className="text-gray-500 text-xs">
+        {uEmojiParser.parseToUnicode(repository.description)}
+      </div>
     </div>
   )
 }
