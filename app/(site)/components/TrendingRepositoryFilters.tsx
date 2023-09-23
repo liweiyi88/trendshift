@@ -45,6 +45,7 @@ const TrendingRepositoryFilters = () => {
         }}
       >
         <option value="all">All days</option>
+        <option value="1">Today</option>
         <option value="7">Last 7 Days</option>
         <option value="30">Last 30 Days</option>
         <option value="360">Last one year</option>
