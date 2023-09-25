@@ -22,7 +22,7 @@ const TrendingRepositoryList = ({ repositories }: Props) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-0">
         {repositories.map((repository) => (
           <TrendingRepositoryCard
             key={repository.repository_id}
