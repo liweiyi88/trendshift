@@ -1,20 +1,12 @@
 import { getLanguageColor } from '@/app/lib/config'
-import { Repository, Trending } from '@/app/lib/repository'
+import { Repository } from '@/app/lib/repository'
 import uEmojiParser from 'universal-emoji-parser'
-
-import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 interface Props {
   repository: Repository
-}
-
-const bestTrending = (repository: Repository): Trending => {
-  return repository.trendings.reduce((prev, current) => {
-    return prev.rank < current.rank ? prev : current
-  })
 }
 
 const TrendingRepositoryCard = ({ repository }: Props) => {
@@ -48,7 +40,7 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-5 h-5 mr-1"
+          className="w-4 h-4 mr-[2px]"
         >
           <path
             strokeLinecap="round"
@@ -57,8 +49,7 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
           />
         </svg>
         <span className="font-semibold">
-          Best ranking: #{bestTrending(repository).rank} on{' '}
-          {dayjs(bestTrending(repository).trend_date).format('D/MMM YYYY')}
+          Best ranking: #{repository.best_ranking}
         </span>
       </div>
 
@@ -78,9 +69,9 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         <div className="text-sm text-gray-500">
           Featured on GitHub Trending{' '}
           <span className="text-indigo-600 font-semibold relative group">
-            {repository.trendings.length}
+            {repository.featured_count}
           </span>{' '}
-          times
+          times over the past period
         </div>
       </div>
 

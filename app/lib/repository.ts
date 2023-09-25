@@ -12,6 +12,8 @@ export interface Repository {
   full_name: string
   description: string
   default_branch: string
+  best_ranking?: number
+  featured_count?: number
   owner: {
     login: string
     avatar_url: string
@@ -48,7 +50,7 @@ export const getTrendingRepositories = async (
   const res = await fetch(query, {
     method: 'GET',
     next: {
-      revalidate: 24 * 3600,
+      revalidate: 2 * 3600,
     },
   })
 
