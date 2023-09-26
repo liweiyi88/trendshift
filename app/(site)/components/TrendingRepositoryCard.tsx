@@ -22,15 +22,17 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         >
           {repository.full_name}
         </Link>
-        <div className="text-gray-500 flex items-center text-xs md:text-sm">
-          <span
-            className="w-2 h-2 md:w-3 md:h-3 rounded-full mr-1"
-            style={{
-              backgroundColor: languageColor,
-            }}
-          ></span>
-          {repository.language}
-        </div>
+        {repository.language !== '' && (
+          <div className="text-gray-500 flex items-center text-xs md:text-sm">
+            <span
+              className="w-2 h-2 md:w-3 md:h-3 rounded-full mr-1 shrink-0"
+              style={{
+                backgroundColor: languageColor,
+              }}
+            ></span>
+            {repository.language}
+          </div>
+        )}
       </div>
 
       <div className="flex text-xs items-center text-yellow-700 mb-4">

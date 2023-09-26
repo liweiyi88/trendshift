@@ -1,6 +1,12 @@
 import { cookies } from 'next/headers'
 import Login from '../login/page'
 import { config } from '../lib/config'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Github Trending Insight | Login',
+  description: 'Login',
+}
 
 interface Props {
   children: React.ReactNode
