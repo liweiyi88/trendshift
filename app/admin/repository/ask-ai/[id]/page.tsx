@@ -3,7 +3,13 @@ import GoBackButton from '@/app/components/GoBackButton'
 import { PageProps } from '@/app/lib/pagetypes'
 import { getRepository } from '@/app/lib/repository'
 import { getTags } from '@/app/lib/tag'
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'Github Trending Insight | Ask AI',
+  description: 'Ask AI',
+}
 
 const AskAIPage = async ({
   params: { id },

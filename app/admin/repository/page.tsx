@@ -3,6 +3,12 @@ import { getTags } from '@/app/lib/tag'
 import React from 'react'
 import RepositoryList from './components/RepositoryList'
 import { PageProps } from '@/app/lib/pagetypes'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Github Trending Insight | Edit Page',
+  description: 'Edit Page',
+}
 
 const RepositoryPage = async ({ searchParams }: PageProps<null>) => {
   const filter = searchParams['q']
