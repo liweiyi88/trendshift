@@ -191,11 +191,7 @@ const RepositoryCard = ({ repository }: Props) => {
         </div>
         <div className="text-xs text-gray-400 flex justify-between items-center">
           <Link
-            href={`${routes.repository}/ask-ai/${
-              repository.id
-            }?${new URLSearchParams({
-              name: repository.full_name,
-            }).toString()}`}
+            href={`${routes.adminRepository}/ask-ai/${repository.repository_id}`}
             scroll={false}
             className="text-blue-500 text-xs font-semibold rounded hover:underline mr-2"
           >

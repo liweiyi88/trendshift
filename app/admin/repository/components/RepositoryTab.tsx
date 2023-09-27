@@ -24,8 +24,8 @@ const RepositoryTab = ({ active }: Props) => {
           value={active}
           onChange={(event) => {
             event.target.value === 'all'
-              ? router.push(`${routes.repository}?q=all`)
-              : router.push(routes.repository)
+              ? router.push(`${routes.adminRepository}?q=all`)
+              : router.push(routes.adminRepository)
           }}
           id="tabs"
           name="tabs"
@@ -41,7 +41,7 @@ const RepositoryTab = ({ active }: Props) => {
           aria-label="Tabs"
         >
           <Link
-            href={routes.repository}
+            href={routes.adminRepository}
             className="text-gray-900 rounded-l-lg group relative min-w-0 overflow-hidden bg-white py-2 px-8 text-center text-sm hover:bg-gray-50 focus:z-10"
           >
             <span>Today</span>
@@ -54,7 +54,7 @@ const RepositoryTab = ({ active }: Props) => {
           </Link>
 
           <Link
-            href={`${routes.repository}?q=all`}
+            href={`${routes.adminRepository}?q=all`}
             className="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 overflow-hidden bg-white py-2 px-8 text-center text-sm hover:bg-gray-50 focus:z-10"
           >
             <span>All</span>

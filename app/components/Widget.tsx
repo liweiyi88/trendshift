@@ -3,14 +3,16 @@ import classNames from 'classnames'
 interface Props {
   children?: React.ReactNode
   className?: string
-  label?: string
+  label?: React.ReactNode
+  bordered?: boolean
 }
 
-const Widget = ({ className, children, label }: Props) => {
+const Widget = ({ className, children, label, bordered = true }: Props) => {
   return (
     <div
       className={classNames(
-        'bg-white rounded-lg border border-gray-200 relative',
+        bordered ? 'border' : '',
+        'bg-white rounded-lg border-gray-200 relative',
         className,
       )}
     >
