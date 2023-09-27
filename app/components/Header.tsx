@@ -22,10 +22,10 @@ const Header = () => {
               </div>
             </div>
           </div>
-          {!path.startsWith(routes.repository) && (
+          {!path.startsWith(routes.adminRepository) && (
             <div>
               <Link
-                href={routes.repository}
+                href={routes.adminRepository}
                 className="px-4 py-2 bg-black rounded text-white text-sm"
               >
                 Admin Login

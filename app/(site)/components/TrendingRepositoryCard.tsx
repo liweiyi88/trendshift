@@ -1,4 +1,4 @@
-import { getLanguageColor } from '@/app/lib/config'
+import { getLanguageColor, routes } from '@/app/lib/config'
 import { Repository } from '@/app/lib/repository'
 import uEmojiParser from 'universal-emoji-parser'
 import Image from 'next/image'
@@ -17,8 +17,7 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
       <div className="md:flex md:justify-between md:items-center text-sm md:text-base mb-1">
         <Link
           className="text-blue-400 font-medium hover:underline mb-1 md:mb-0 max-w-[3/4] break-all"
-          href={`https://github.com/${repository.full_name}`}
-          target="_blank"
+          href={`${routes.repository}/${repository.repository_id}`}
         >
           {repository.full_name}
         </Link>
@@ -50,9 +49,18 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
             d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
           />
         </svg>
-        <span className="font-semibold">
+        <span className="font-semibold mr-2">
           Best ranking: #{repository.best_ranking}
         </span>
+
+        <Link
+          className="underline hover:cursor-pointer"
+          href={`https://github.com/${repository.full_name}`}
+          target="_blank"
+          scroll={true}
+        >
+          Visit GitHub
+        </Link>
       </div>
 
       <div className="flex items-center border-b pb-4 mb-4">

@@ -2,6 +2,7 @@ import { config } from './config'
 import { Tag } from './tag'
 
 export interface Trending {
+  trending_language: string | null
   trend_date: string
   rank: number
 }
@@ -82,10 +83,8 @@ export const getRepositories = async (
   return res.json()
 }
 
-export const getRepository = async (fullName: string): Promise<Repository> => {
-  const query = `${config.apiHost}/api/repositories/${encodeURIComponent(
-    fullName,
-  )}`
+export const getRepository = async (id: number): Promise<Repository> => {
+  const query = `${config.apiHost}/api/repositories/${id}`
 
   const res = await fetch(query, {
     method: 'GET',

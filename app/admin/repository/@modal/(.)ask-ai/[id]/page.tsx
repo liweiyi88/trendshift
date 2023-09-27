@@ -1,29 +1,14 @@
 import AskAIModalButtons from '@/app/admin/repository/components/AskAIModalButtons'
-import GoBackButton from '@/app/components/GoBackButton'
 import { Modal } from '@/app/components/Modal'
 import { PageProps } from '@/app/lib/pagetypes'
 import { getRepository } from '@/app/lib/repository'
 import { getTags } from '@/app/lib/tag'
 import React from 'react'
 
-const AskAIModal = async ({
-  params: { id },
-  searchParams,
-}: PageProps<{ id: string }>) => {
+const AskAIModal = async ({ params: { id } }: PageProps<{ id: number }>) => {
   const tags = await getTags()
 
-  const repositoryName = searchParams['name'] as string
-
-  if (!repositoryName) {
-    return (
-      <Modal>
-        Missing repository name
-        <GoBackButton />
-      </Modal>
-    )
-  }
-
-  const repository = await getRepository(repositoryName)
+  const repository = await getRepository(id)
 
   const res = await fetch(
     `https://raw.githubusercontent.com/${repository.full_name}/${repository.default_branch}/README.md`,
