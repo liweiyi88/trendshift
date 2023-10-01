@@ -18,6 +18,7 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         <Link
           className="text-blue-400 font-medium hover:underline mb-1 md:mb-0 max-w-[3/4] break-all"
           href={`${routes.repository}/${repository.repository_id}`}
+          scroll={false}
         >
           {repository.full_name}
         </Link>

@@ -15,12 +15,22 @@ interface Props {
 }
 
 const TrendingLineChart = ({ trendings }: Props) => {
-  const data = trendings.map((trending) => {
-    return {
-      ...trending,
-      trend_date: dayjs(trending.trend_date).format('DD/MM YYYY'),
-    }
-  })
+  const data = trendings
+    .map((trending) => {
+      return {
+        ...trending,
+        trend_date: dayjs(trending.trend_date).format('YYYY-MM-DD'),
+      }
+    })
+    .sort((a, b) => {
+      if (a.trend_date > b.trend_date) {
+        return 1
+      } else if (a.trend_date === b.trend_date) {
+        return 0
+      } else {
+        return -1
+      }
+    })
 
   const allLanguage = data.filter((trending) => {
     return (
