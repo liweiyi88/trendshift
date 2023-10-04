@@ -45,7 +45,7 @@ export const getTrendingRepositories = async (
     url.append('language', language)
   }
 
-  limit ? url.append('limit', limit) : url.append('limit', '20')
+  limit ? url.append('limit', limit) : url.append('limit', '25')
 
   const query = `${config.apiHost}/api/trending-repositories?${url.toString()}`
   const res = await fetch(query, {

@@ -9,7 +9,7 @@ const TrendingRepositoryFilters = () => {
 
   const range = searchParams.get('trending-range') ?? 'all'
   const language = searchParams.get('trending-language') ?? 'all'
-  const limit = searchParams.get('trending-limit') ?? '20'
+  const limit = searchParams.get('trending-limit') ?? '25'
 
   const getURLSearchParam = (
     range: string,
@@ -25,7 +25,7 @@ const TrendingRepositoryFilters = () => {
       url.append('trending-language', language)
     }
 
-    if (limit !== '20') {
+    if (limit !== '25') {
       url.append('trending-limit', limit)
     }
 
@@ -85,7 +85,7 @@ const TrendingRepositoryFilters = () => {
           router.push(`?${searchParams.toString()}`, { scroll: false })
         }}
       >
-        <option value="20">Show 20</option>
+        <option value="25">Show 25</option>
         <option value="50">Show 50</option>
         <option value="100">Show 100</option>
       </select>
