@@ -42,6 +42,7 @@ const Search = ({ onClose }: Props) => {
 
   console.log(error)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((inputVal: string | undefined) => {
       if (inputVal) {
