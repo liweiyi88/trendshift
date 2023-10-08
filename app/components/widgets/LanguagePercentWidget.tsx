@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Widget from '../Widget'
-import { Axis, Chart, Coordinate, Interval, getTheme, Tooltip } from 'bizcharts'
+import { Pie, PieConfig } from '@ant-design/plots'
 import { Repository } from '@/app/lib/repository'
 
 interface Props {
@@ -27,61 +27,38 @@ const LanguagePercentWidget = ({ repositories }: Props) => {
   })
 
   const entries = Object.keys(data).map((key) => {
-    return { item: key, percent: Number((data[key] / totalCount).toFixed(2)) }
+    return { type: key, value: Number((data[key] / totalCount).toFixed(2)) }
   })
 
-  const colors = entries.reduce((pre: Record<string, unknown>, cur, idx) => {
-    pre[cur.item] = getTheme().colors10[idx]
-    return pre
-  }, {})
-
-  const cols = {
-    percent: {
-      formatter: (val: number) => {
-        const v = val * 100 + '%'
-        return v
-      },
+  const config = {
+    appendPadding: 10,
+    data: entries,
+    angleField: 'value',
+    colorField: 'type',
+    legend: {
+      position: 'bottom',
+      itemSpacing: 3,
     },
-  }
+    radius: 0.8,
+    label: {
+      type: 'spider',
+      content: '{name} {percentage}',
+    },
+    interactions: [
+      {
+        type: 'pie-legend-active',
+      },
+      {
+        type: 'element-active',
+      },
+    ],
+  } as PieConfig
 
   return (
     <Widget label="Language Percent">
-      <Chart
-        height={400}
-        data={entries}
-        scale={cols}
-        interactions={['element-active']}
-        autoFit
-      >
-        <Coordinate type="theta" radius={0.75} />
-        <Tooltip showTitle={false} />
-        <Axis visible={false} />
-        <Interval
-          position="percent"
-          adjust="stack"
-          color="item"
-          style={{
-            lineWidth: 1,
-            stroke: '#fff',
-          }}
-          label={[
-            'item',
-            (item) => {
-              return {
-                offset: 20,
-                content: (data) => {
-                  return `${data.item}\n ${
-                    Number((data.percent * 100).toFixed(2)) - 0
-                  }%`
-                },
-                style: {
-                  fill: colors[item],
-                },
-              }
-            },
-          ]}
-        />
-      </Chart>
+      <div className="h-[400px]">
+        <Pie {...config} />
+      </div>
     </Widget>
   )
 }

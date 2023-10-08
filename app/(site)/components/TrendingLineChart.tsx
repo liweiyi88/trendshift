@@ -1,14 +1,10 @@
 'use client'
 
 import { Trending } from '@/app/lib/repository'
-import { Chart, Coord, Line, Point, Tooltip } from 'bizcharts'
 import React from 'react'
 import dayjs from 'dayjs'
 import Widget from '@/app/components/Widget'
-
-const scale = {
-  count: { min: 0 },
-}
+import { Line, LineConfig } from '@ant-design/plots'
 
 interface Props {
   trendings: Trending[]
@@ -47,39 +43,38 @@ const TrendingLineChart = ({ trendings }: Props) => {
   const trandingLanguage =
     language && language.length > 0 ? language[0].trending_language : 'Unknown'
 
+  const config = {
+    xField: 'trend_date',
+    yField: 'rank',
+    autoFit: true,
+    padding: 40,
+    reflect: 'y',
+    legend: {
+      position: 'bottom',
+    },
+    point: {
+      size: 3,
+      shape: 'dot',
+      style: {
+        fill: 'white',
+        lineWidth: 1,
+      },
+    },
+    yAxis: {},
+    xAxis: {
+      animate: true,
+      type: 'timeCat',
+    },
+    smooth: true,
+  } as LineConfig
+
   return (
     <>
       <div className="mb-4">
         {allLanguage && allLanguage.length > 0 && (
           <Widget label="All language ranking">
-            <div className="mt-10">
-              <Chart
-                height={300}
-                scale={scale}
-                padding={[30, 20, 60, 40]}
-                autoFit
-                data={allLanguage}
-                interactions={['element-active']}
-              >
-                <Point
-                  position="trend_date*rank"
-                  color="green"
-                  shape="circle"
-                />
-                <Line
-                  shape="smooth"
-                  position="trend_date*rank"
-                  color="green"
-                  label="rank"
-                />
-                <Coord reflect="y" />
-                <Tooltip
-                  shared
-                  showCrosshairs
-                  region={null}
-                  g2-tooltip-list-item={{ display: 'flex' }}
-                />
-              </Chart>
+            <div className="mt-10 h-[300px]">
+              <Line {...config} data={allLanguage} />
             </div>
           </Widget>
         )}
@@ -90,34 +85,8 @@ const TrendingLineChart = ({ trendings }: Props) => {
           <Widget
             label={<div className="capitalize">{trandingLanguage} ranking</div>}
           >
-            <div className="mt-10">
-              <Chart
-                height={300}
-                scale={scale}
-                padding={[30, 20, 60, 40]}
-                autoFit
-                data={language}
-                interactions={['element-active']}
-              >
-                <Coord reflect="y" />
-                <Point
-                  position="trend_date*rank"
-                  color="orange"
-                  shape="circle"
-                />
-                <Line
-                  shape="smooth"
-                  position="trend_date*rank"
-                  color="orange"
-                  label="rank"
-                />
-                <Tooltip
-                  shared
-                  showCrosshairs
-                  region={null}
-                  g2-tooltip-list-item={{ display: 'flex' }}
-                />
-              </Chart>
+            <div className="mt-10 h-[300px]">
+              <Line {...config} data={language} color="orange" />
             </div>
           </Widget>
         </div>
