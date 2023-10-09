@@ -8,9 +8,14 @@ import LanguagePercentWidget from '@/app/components/widgets/LanguagePercentWidge
 interface Props {
   repositories?: Repository[] // repositories could be null if today's data is not ready.
   searchLanguage?: string
+  searchRange?: number
 }
 
-const TrendingRepositoryList = ({ repositories, searchLanguage }: Props) => {
+const TrendingRepositoryList = ({
+  repositories,
+  searchLanguage,
+  searchRange,
+}: Props) => {
   return (
     <>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">
@@ -39,6 +44,7 @@ const TrendingRepositoryList = ({ repositories, searchLanguage }: Props) => {
             <TrendingRepositoryCard
               key={repository.repository_id}
               repository={repository}
+              searchRange={searchRange}
             />
           ))}
       </div>

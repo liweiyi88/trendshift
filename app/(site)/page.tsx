@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const Home = async ({ searchParams }: PageProps<null>) => {
   // const topicRange = searchParams['topic-range'] as string
-  const trendingRange = searchParams['trending-range'] as string
+  const trendingRange = searchParams['trending-range'] as string | undefined
   const trendingLanguage = searchParams['trending-language'] as string
   const trendingLimit = searchParams['trending-limit'] as string
 
@@ -28,6 +28,7 @@ const Home = async ({ searchParams }: PageProps<null>) => {
         <TrendingRepositoryList
           repositories={trendingRepositories}
           searchLanguage={trendingLanguage}
+          searchRange={trendingRange ? Number(trendingRange) : undefined}
         />
       </Section>
 

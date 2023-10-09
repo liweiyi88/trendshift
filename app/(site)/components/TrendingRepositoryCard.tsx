@@ -7,10 +7,29 @@ import React from 'react'
 
 interface Props {
   repository: Repository
+  searchRange?: number
 }
 
-const TrendingRepositoryCard = ({ repository }: Props) => {
+const period = (searchRange?: number): string => {
+  if (!searchRange) {
+    return 'of all days.'
+  }
+
+  if (searchRange === 1) {
+    return 'of today.'
+  }
+
+  if (searchRange === 360) {
+    return 'over past a year.'
+  }
+
+  return `over past ${searchRange} days.`
+}
+
+const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
   const languageColor = getLanguageColor(repository.language)
+
+  console.log(searchRange)
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
@@ -36,24 +55,6 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
       </div>
 
       <div className="flex text-xs items-center text-yellow-700 mb-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-4 h-4 mr-[2px]"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
-          />
-        </svg>
-        <span className="font-semibold mr-2">
-          Best ranking: #{repository.best_ranking}
-        </span>
-
         <Link
           className="underline hover:cursor-pointer"
           href={`https://github.com/${repository.full_name}`}
@@ -68,21 +69,25 @@ const TrendingRepositoryCard = ({ repository }: Props) => {
         <Link
           href={`https://github.com/${repository.owner.login}`}
           target="_blank"
+          className="mr-0 h-10 w-10"
         >
           <Image
             src={repository.owner.avatar_url}
             alt={repository.owner.login}
             width={20}
             height={20}
-            className="rounded-full mr-2"
+            className="rounded-full"
           />
         </Link>
         <div className="text-sm text-gray-500">
-          Featured on GitHub Trending{' '}
+          <span className="text-yellow-700 font-medium">
+            Highest rank achieved: #{repository.best_ranking}
+          </span>{' '}
+          and featured on GitHub Trending{' '}
           <span className="text-indigo-600 font-semibold relative group">
             {repository.featured_count}
           </span>{' '}
-          times over the past period
+          times {period(searchRange)}
         </div>
       </div>
 

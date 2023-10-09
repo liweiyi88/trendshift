@@ -31,7 +31,7 @@ export interface Repository {
 type Filter = 'today' | 'all'
 
 export const getTrendingRepositories = async (
-  range: string | null,
+  range: string | undefined,
   language: string | null,
   limit: string | null,
 ): Promise<Repository[]> => {
