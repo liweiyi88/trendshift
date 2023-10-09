@@ -29,8 +29,6 @@ const period = (searchRange?: number): string => {
 const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
   const languageColor = getLanguageColor(repository.language)
 
-  console.log(searchRange)
-
   return (
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="md:flex md:justify-between md:items-center text-sm md:text-base mb-1">
