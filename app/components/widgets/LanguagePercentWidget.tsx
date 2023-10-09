@@ -41,7 +41,7 @@ const LanguagePercentWidget = ({ repositories }: Props) => {
     },
     radius: 0.8,
     label: {
-      type: 'spider',
+      type: 'outer',
       content: '{name} {percentage}',
     },
     interactions: [
