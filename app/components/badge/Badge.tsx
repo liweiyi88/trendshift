@@ -37,7 +37,7 @@ const Badge = ({ rank, type }: Props) => {
           letterSpacing: '0em',
           lineHeight: 1.5,
         }}
-        x="4"
+        x="6"
         y="10"
       >
         <div>GITHUB TRENDING</div>
@@ -69,7 +69,7 @@ const Badge = ({ rank, type }: Props) => {
           letterSpacing: '0em',
           lineHeight: 1.5,
         }}
-        x="62"
+        x="64"
         y="24"
       >
         <div>
