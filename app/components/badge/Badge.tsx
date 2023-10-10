@@ -9,8 +9,8 @@ const Badge = ({ rank, type }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 260 60"
-      width="260"
+      viewBox="0 0 250 60"
+      width="250"
       height="60"
       data-date-format="longDate"
     >
@@ -37,7 +37,7 @@ const Badge = ({ rank, type }: Props) => {
           letterSpacing: '0em',
           lineHeight: 1.5,
         }}
-        x="0"
+        x="4"
         y="10"
       >
         <div>GITHUB TRENDING</div>
@@ -49,7 +49,7 @@ const Badge = ({ rank, type }: Props) => {
         viewBox="0 0 80 80"
         width="48"
         height="45"
-        x="4"
+        x="10"
         y="8"
       >
         <path
@@ -69,7 +69,7 @@ const Badge = ({ rank, type }: Props) => {
           letterSpacing: '0em',
           lineHeight: 1.5,
         }}
-        x="58"
+        x="62"
         y="24"
       >
         <div>
@@ -88,7 +88,7 @@ const Badge = ({ rank, type }: Props) => {
           letterSpacing: '0em',
           lineHeight: 1.5,
         }}
-        x="-42"
+        x="-36"
         y="9"
       >
         <div>{rank}</div>
