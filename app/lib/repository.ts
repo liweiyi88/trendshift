@@ -98,3 +98,13 @@ export const getRepository = async (id: number): Promise<Repository> => {
 
   return res.json()
 }
+
+export const getBestRanking = (repository: Repository): number => {
+  return repository.trendings.sort((a, b) => {
+    if (a.rank === b.rank) {
+      return 0
+    }
+
+    return a.rank < b.rank ? -1 : 1
+  })[0].rank
+}

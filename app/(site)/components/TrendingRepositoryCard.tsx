@@ -52,7 +52,21 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
         )}
       </div>
 
-      <div className="flex text-xs items-center text-yellow-700 mb-4">
+      <div className="flex text-xs items-center font-medium text-yellow-700 mb-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-3 h-3 mr-1"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+          />
+        </svg>
         <Link
           className="underline hover:cursor-pointer"
           href={`https://github.com/${repository.full_name}`}
@@ -67,7 +81,7 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
         <Link
           href={`https://github.com/${repository.owner.login}`}
           target="_blank"
-          className="mr-0 h-10 w-10"
+          className="mr-2 h-5 w-5"
         >
           <Image
             src={repository.owner.avatar_url}
@@ -78,10 +92,7 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
           />
         </Link>
         <div className="text-sm text-gray-500">
-          <span className="text-yellow-700 font-medium">
-            Highest rank achieved: #{repository.best_ranking}
-          </span>{' '}
-          and featured on GitHub Trending{' '}
+          Featured on GitHub Trending{' '}
           <span className="text-indigo-600 font-semibold relative group">
             {repository.featured_count}
           </span>{' '}

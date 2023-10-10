@@ -1,6 +1,7 @@
 export const config = {
   jwtCookie: 'gti_access_token',
   apiHost: process.env.API_HOST ?? 'http://localhost:8080',
+  host: process.env.NEXT_PUBLIC_HOST ?? 'http://localhost:3000',
 }
 
 export const getLanguageColor = (language: string): string => {
