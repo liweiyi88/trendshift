@@ -1,9 +1,11 @@
 import { getLanguageColor } from '@/app/lib/config'
-import { Repository } from '@/app/lib/repository'
+import { Repository, getBestRanking } from '@/app/lib/repository'
 import Link from 'next/link'
 import React from 'react'
 import uEmojiParser from 'universal-emoji-parser'
 import TrendingLineChart from './TrendingLineChart'
+import Badge from '@/app/components/badge/Badge'
+import EmbedBadgeBtn from '@/app/components/badge/EmbedBadgeBtn'
 
 interface Props {
   repository: Repository
@@ -12,13 +14,7 @@ interface Props {
 const RepositoryDetail = ({ repository }: Props) => {
   const languageColor = getLanguageColor(repository.language)
 
-  const bestRanking = repository.trendings.sort((a, b) => {
-    if (a.rank === b.rank) {
-      return 0
-    }
-
-    return a.rank < b.rank ? -1 : 1
-  })[0].rank
+  const bestRanking = getBestRanking(repository)
 
   return (
     <>
@@ -38,33 +34,59 @@ const RepositoryDetail = ({ repository }: Props) => {
         )}
       </div>
 
-      <div className="text-xs mb-4 flex items-center text-yellow-700">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-4 h-4 mr-[2px]"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
-          />
-        </svg>
-        <span className="font-semibold mr-2">
-          Highest rank achieved: #{bestRanking}
-        </span>
+      <div className="mb-4">
+        <div className="mb-2">
+          <Badge type="Repository" rank={bestRanking} />
+        </div>
 
-        <Link
-          className="underline hover:cursor-pointer"
-          href={`https://github.com/${repository.full_name}`}
-          target="_blank"
-          scroll={true}
-        >
-          Visit GitHub
-        </Link>
+        <div className="text-xs mb-2 flex items-center font-medium text-yellow-700 space-x-4">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-3 h-3 mr-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+              />
+            </svg>
+
+            <Link
+              className="hover:cursor-pointer hover:underline"
+              href={`https://github.com/${repository.full_name}`}
+              target="_blank"
+              scroll={true}
+            >
+              Visit GitHub
+            </Link>
+          </div>
+
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4 mr-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
+              />
+            </svg>
+            <EmbedBadgeBtn
+              id={repository.repository_id}
+              fullName={repository.full_name}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="text-sm text-gray-500">
