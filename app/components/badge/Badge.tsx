@@ -9,9 +9,9 @@ const Badge = ({ rank, type }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 250 60"
+      viewBox="0 0 250 53"
       width="250"
-      height="60"
+      height="55"
       data-date-format="longDate"
     >
       <rect
