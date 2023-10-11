@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'Github Trending Insight | Ask AI',
+  title: 'Trendshift - Ask AI',
   description: 'Ask AI',
 }
 

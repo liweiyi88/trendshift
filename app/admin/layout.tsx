@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import Container from '../components/Container'
 
 export const metadata: Metadata = {
-  title: 'Github Trending Insight | Login',
+  title: 'Trendshift - Login',
   description: 'Login',
 }
 

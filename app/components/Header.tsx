@@ -6,6 +6,7 @@ import { routes } from '../lib/config'
 import { usePathname } from 'next/navigation'
 import Search from './search/Search'
 import { useState } from 'react'
+import Logo from './logo/Logo'
 
 const Header = () => {
   const path = usePathname()
@@ -19,11 +20,8 @@ const Header = () => {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex items-baseline space-x-4">
-                <div
-                  className="border-r border-gray-300 pr-4 font-semibold"
-                  aria-current="page"
-                >
-                  <Link href={'/'}>GitHub Trending Insight</Link>
+                <div className="pr-4 font-semibold" aria-current="page">
+                  <Logo />
                 </div>
               </div>
             </div>
@@ -57,7 +55,7 @@ const Header = () => {
                   href={routes.adminRepository}
                   className="px-4 py-2 bg-black rounded text-white text-sm"
                 >
-                  Admin Login
+                  Login
                 </Link>
               </div>
             )}

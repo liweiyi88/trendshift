@@ -36,7 +36,7 @@ export const BackTop = ({ visibilityHeight = 400 }: Props) => {
     >
       <button
         onClick={scrollToTop}
-        className="focus:outline-none w-10 h-10 text-base cursor-pointer bg-blue-500 text-white rounded"
+        className="focus:outline-none w-10 h-10 text-base cursor-pointer bg-indigo-500 text-white rounded"
       >
         Top
       </button>

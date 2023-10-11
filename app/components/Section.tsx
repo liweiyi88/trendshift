@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Section = ({ children }: Props) => {
-  return <section className="mb-24">{children}</section>
+  return <section className="mb-12">{children}</section>
 }
 
 export default Section

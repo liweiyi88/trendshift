@@ -4,6 +4,8 @@ import TrendingRepositoryCard from './TrendingRepositoryCard'
 import TrendingRepositoryFilters from './TrendingRepositoryFilters'
 import { BackTop } from '@/app/components/BackTop'
 import LanguagePercentWidget from '@/app/components/widgets/LanguagePercentWidget'
+import Notice from '@/app/components/Notice'
+import dayjs from 'dayjs'
 
 interface Props {
   repositories?: Repository[] // repositories could be null if today's data is not ready.
@@ -18,6 +20,13 @@ const TrendingRepositoryList = ({
 }: Props) => {
   return (
     <>
+      <div className="mb-3">
+        <Notice
+          text={`GitHub trending repositories data is fetched since ${dayjs(
+            '2023-09-08',
+          ).format('D MMM, YYYY')}.`}
+        />
+      </div>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">
         <div className="md:pr-2 text-base font-medium mb-1 md:mb-0">
           Trending repositories
@@ -26,6 +35,7 @@ const TrendingRepositoryList = ({
           <TrendingRepositoryFilters />
         </div>
       </div>
+
       {!searchLanguage && repositories && (
         <div className="mb-3">
           <LanguagePercentWidget repositories={repositories} />
