@@ -5,8 +5,9 @@ import Section from '../components/Section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Github Trending Insight',
-  description: 'Analyse Github trending repositories.',
+  title: 'Trendshift - Github Trending Repositories',
+  description: 'Github trending repositories.',
+  keywords: ['github', 'trending', 'developer', 'repository'],
 }
 
 const Home = async ({ searchParams }: PageProps<null>) => {

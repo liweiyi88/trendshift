@@ -6,7 +6,7 @@ import { PageProps } from '@/app/lib/pagetypes'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Github Trending Insight | Edit Page',
+  title: 'Trendshift - Edit Page',
   description: 'Edit Page',
 }
 

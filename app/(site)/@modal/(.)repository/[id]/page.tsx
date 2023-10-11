@@ -4,6 +4,13 @@ import { PageProps } from '@/app/lib/pagetypes'
 import { getRepository } from '@/app/lib/repository'
 import React from 'react'
 import CloseButton from './components/CloseButton'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Trendshift - Trending Repository Details',
+  description: 'Trending repository details.',
+  keywords: ['github', 'trending', 'repository'],
+}
 
 const RepositoryModal = async ({
   params: { id },

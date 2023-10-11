@@ -23,7 +23,7 @@ const EmbedBadgeBtn = ({ id, fullName }: Props) => {
             config.host
           }/api/badge/repository/${id}" alt="${encodeURIComponent(
             fullName,
-          )} | GitHub Trending Insight" style="width: 250px; height: 55px;" width="250" height="55"/></a>`
+          )} | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>`
           navigator.clipboard.writeText(embedCode)
 
           setCopied(true)
