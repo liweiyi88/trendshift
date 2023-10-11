@@ -19,9 +19,9 @@ const EmbedBadgeBtn = ({ id, fullName }: Props) => {
         onClick={() => {
           const embedCode = `<a href="${
             config.host
-          }/repository/${id}" target="_blank"><img src="${
+          }/repositories/${id}" target="_blank"><img src="${
             config.host
-          }/api/badge/repository/${id}" alt="${encodeURIComponent(
+          }/api/badge/repositories/${id}" alt="${encodeURIComponent(
             fullName,
           )} | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>`
           navigator.clipboard.writeText(embedCode)

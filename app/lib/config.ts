@@ -65,7 +65,7 @@ export const getLanguageColor = (language: string): string => {
 }
 
 export const routes = {
-  repository: '/repository',
+  repositories: '/repositories',
   adminRepository: '/admin/repository',
   login: '/login',
 }
