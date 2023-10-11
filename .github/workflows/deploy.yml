@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: julianli/gti-web
+          images: julianli/trendshift
 
       - name: Build and push
         uses: docker/build-push-action@v4
