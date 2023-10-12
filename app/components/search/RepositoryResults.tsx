@@ -23,7 +23,7 @@ const RepositoryResults = ({ repositories }: Props) => {
       <div className="mb-4 font-medium">Repositories</div>
       {repositories.map((repository) => {
         return (
-          <a key={repository.id} href={`/repository/${repository.id}`}>
+          <a key={repository.id} href={`/repositories/${repository.id}`}>
             <div className="flex items-center justify-between hover:bg-gray-100 hover:cursor-pointer -mx-4 px-3 py-2 rounded text-gray-700">
               <div className="flex items-center">
                 <span className="mr-1">
