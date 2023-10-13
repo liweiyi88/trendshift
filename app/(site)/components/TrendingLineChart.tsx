@@ -28,20 +28,26 @@ const TrendingLineChart = ({ trendings }: Props) => {
       }
     })
 
-  const allLanguage = data.filter((trending) => {
-    return (
-      trending.trending_language == null || trending.trending_language == ''
-    )
-  })
+  const languageMap = {} as Record<string, Trending[]>
 
-  const language = data.filter((trending) => {
-    return (
-      trending.trending_language !== null && trending.trending_language !== ''
-    )
+  data.forEach((trending) => {
+    if (
+      trending.trending_language === null ||
+      trending.trending_language == ''
+    ) {
+      if (!languageMap['all']) {
+        languageMap['all'] = [trending]
+      } else {
+        languageMap['all'].push(trending)
+      }
+    } else {
+      if (!languageMap[trending.trending_language]) {
+        languageMap[trending.trending_language] = [trending]
+      } else {
+        languageMap[trending.trending_language].push(trending)
+      }
+    }
   })
-
-  const trandingLanguage =
-    language && language.length > 0 ? language[0].trending_language : 'Unknown'
 
   const config = {
     xField: 'trend_date',
@@ -69,29 +75,20 @@ const TrendingLineChart = ({ trendings }: Props) => {
   } as LineConfig
 
   return (
-    <>
-      <div className="mb-4">
-        {allLanguage && allLanguage.length > 0 && (
-          <Widget label="All language ranking">
-            <div className="mt-10 h-[300px]">
-              <Line {...config} data={allLanguage} />
-            </div>
-          </Widget>
-        )}
-      </div>
-
-      {language && language.length > 0 && (
-        <div className="pb-6">
+    <div className="flex flex-col space-y-4">
+      {Object.entries(languageMap)
+        .sort()
+        .map(([key, value]) => (
           <Widget
-            label={<div className="capitalize">{trandingLanguage} ranking</div>}
+            key={key}
+            label={<div className="capitalize">{key} ranking</div>}
           >
             <div className="mt-10 h-[300px]">
-              <Line {...config} data={language} color="orange" />
+              <Line {...config} data={value} />
             </div>
           </Widget>
-        </div>
-      )}
-    </>
+        ))}
+    </div>
   )
 }
 
