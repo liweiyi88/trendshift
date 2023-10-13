@@ -46,9 +46,11 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
       </div>
 
       <div className="flex">
-        <div className="md:hidden mr-1">
-          <Language language={repository.language} />
-        </div>
+        {repository.language !== '' && (
+          <div className="md:hidden mr-1">
+            <Language language={repository.language} />
+          </div>
+        )}
         <div className="flex text-xs items-center font-medium text-yellow-700 mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
