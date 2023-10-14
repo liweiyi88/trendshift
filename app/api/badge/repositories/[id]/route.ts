@@ -9,7 +9,7 @@ export const GET = async (
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 53" width="250" height="55" data-date-format="longDate">
-    <rect xmlns="http://www.w3.org/2000/svg" stroke="#4a0e99" stroke-width="1" fill="none" x="0.5" y="0.5" width="249" height="53" rx="10"/>
+    <rect xmlns="http://www.w3.org/2000/svg" stroke="#4a0e99" stroke-width="1" fill="#FFFFFF" x="0.5" y="0.5" width="249" height="53" rx="10"/>
     <foreignObject width="198" height="17" style="font-size: 9px;color: rgb(67, 39, 135);font-family: Arial;font-weight: 400;text-align: center;letter-spacing: 0em;line-height: 1.5;" x="6" y="10" selection="true">
       <div xmlns="http://www.w3.org/1999/xhtml">GITHUB TRENDING</div>
     </foreignObject>
