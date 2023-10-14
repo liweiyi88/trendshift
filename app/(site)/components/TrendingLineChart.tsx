@@ -35,10 +35,10 @@ const TrendingLineChart = ({ trendings }: Props) => {
       trending.trending_language === null ||
       trending.trending_language == ''
     ) {
-      if (!languageMap['all']) {
-        languageMap['all'] = [trending]
+      if (!languageMap['all language']) {
+        languageMap['all language'] = [trending]
       } else {
-        languageMap['all'].push(trending)
+        languageMap['all language'].push(trending)
       }
     } else {
       if (!languageMap[trending.trending_language]) {
