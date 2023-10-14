@@ -33,6 +33,7 @@ export const GET = async (
       'X-Permitted-Cross-Domain-Policies': 'none',
       'X-Xss-Protection': '1; mode=block',
       'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'public, max-age=14400',
     },
   })
 }
