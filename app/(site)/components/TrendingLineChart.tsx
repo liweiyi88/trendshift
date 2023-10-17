@@ -75,7 +75,7 @@ const TrendingLineChart = ({ trendings }: Props) => {
   } as LineConfig
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4 overflow-y-scroll mb-6">
       {Object.entries(languageMap)
         .sort()
         .map(([key, value]) => (

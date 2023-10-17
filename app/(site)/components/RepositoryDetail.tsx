@@ -93,7 +93,7 @@ const RepositoryDetail = ({ repository }: Props) => {
         {uEmojiParser.parseToUnicode(repository.description)}
       </div>
 
-      <div className="my-4">
+      <div className="mt-4 overflow-auto">
         <TrendingLineChart trendings={repository.trendings} />
       </div>
     </>
