@@ -14,7 +14,7 @@ const Repository = async ({ params: { id } }: PageProps<{ id: number }>) => {
   const repository = await getRepository(id)
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-lg mx-auto">
       <RepositoryDetail repository={repository} />
     </div>
   )

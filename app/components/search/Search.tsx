@@ -40,8 +40,6 @@ const Search = ({ onClose }: Props) => {
     }
   }, [])
 
-  console.log(error)
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((inputVal: string | undefined) => {
@@ -61,12 +59,12 @@ const Search = ({ onClose }: Props) => {
   )
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-0">
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-      <div className="fixed inset-x-0 z-10 w-screen">
+      <div className="fixed inset-x-0 inset-y-0 md:inset-y-1 z-10 w-screen">
         <div className="flex justify-center text-center items-center">
-          <div className="bg-white relative transform overflow-auto rounded text-left shadow-xl transition-all w-full sm:max-w-4xl p-6">
+          <div className="bg-gray-50 relative transform overflow-auto md:rounded text-left shadow-xl transition-all w-full sm:max-w-4xl p-6 h-screen md:h-auto">
             <div className="relative rounded-md shadow-sm">
               <div className="flex justify-end mb-3">
                 <button
