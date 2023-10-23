@@ -9,6 +9,7 @@ import SearchButton from './search/SearchButton'
 import MobileNavButton from './MobileNav'
 import { useState } from 'react'
 import classNames from 'classnames'
+import Navbar from './Navbar'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -20,7 +21,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="bg-white py-1">
+      <nav className="bg-white">
         <Container>
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center z-10">
@@ -48,6 +49,12 @@ const Header = () => {
           </div>
         </Container>
 
+        <div className="hidden md:block border-b border-gray-200 pb-4">
+          <Container>
+            <Navbar />
+          </Container>
+        </div>
+
         {open && (
           <div className="md:hidden" aria-label="Global" id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2">
@@ -72,6 +79,12 @@ const Header = () => {
                 Trending developers
               </Link>
             </div>
+            <Link
+              href={routes.adminRepository}
+              className="block mx-2 py-2 my-6 bg-indigo-700 rounded text-white text-sm text-center"
+            >
+              Login
+            </Link>
           </div>
         )}
       </nav>
