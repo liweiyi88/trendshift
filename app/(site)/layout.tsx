@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from '../components/Container'
-import Header from '../components/Header'
+import Header from '../components/header/Header'
 import Footer from '../components/Footer'
 
 interface Props {
