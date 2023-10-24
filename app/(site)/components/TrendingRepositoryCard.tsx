@@ -11,7 +11,7 @@ interface Props {
   searchRange?: number
 }
 
-const period = (searchRange?: number): string => {
+export const period = (searchRange?: number): string => {
   if (!searchRange) {
     return 'of all days.'
   }
