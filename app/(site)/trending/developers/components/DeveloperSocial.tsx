@@ -15,10 +15,20 @@ const blogLink = (blog: string) => {
 }
 
 const DeveloperSocial = ({ developer }: Props) => {
+  if (
+    !developer.company &&
+    !developer.location &&
+    !developer.email &&
+    !developer.blog &&
+    !developer.twitter_username
+  ) {
+    return null
+  }
+
   return (
-    <div className="space-y-1">
+    <div className="md:columns-2 text-sm text-yellow-700 space-y-1 bg-yellow-50 py-2 px-2 md:px-4 border rounded-lg">
       {developer.company && (
-        <div className="flex items-center text-sm">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -37,7 +47,7 @@ const DeveloperSocial = ({ developer }: Props) => {
         </div>
       )}
       {developer.location && (
-        <div className="flex items-center text-sm">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,7 +71,7 @@ const DeveloperSocial = ({ developer }: Props) => {
         </div>
       )}
       {developer.email && developer.email !== '' && (
-        <div className="flex items-center text-sm">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -81,7 +91,7 @@ const DeveloperSocial = ({ developer }: Props) => {
         </div>
       )}
       {developer.blog && developer.blog !== '' && (
-        <div className="flex items-center text-sm">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -103,11 +113,11 @@ const DeveloperSocial = ({ developer }: Props) => {
         </div>
       )}
       {developer.twitter_username && (
-        <div className="flex items-center text-sm">
+        <div className="flex items-center">
           <svg
             viewBox="0 0 20 20"
             aria-hidden="true"
-            className="h-4 w-4 fill-slate-400 mr-2 "
+            className="h-4 w-4 fill-yellow-700 mr-2"
           >
             <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0 0 20 3.92a8.19 8.19 0 0 1-2.357.646 4.118 4.118 0 0 0 1.804-2.27 8.224 8.224 0 0 1-2.605.996 4.107 4.107 0 0 0-6.993 3.743 11.65 11.65 0 0 1-8.457-4.287 4.106 4.106 0 0 0 1.27 5.477A4.073 4.073 0 0 1 .8 7.713v.052a4.105 4.105 0 0 0 3.292 4.022 4.095 4.095 0 0 1-1.853.07 4.108 4.108 0 0 0 3.834 2.85A8.233 8.233 0 0 1 0 16.407a11.615 11.615 0 0 0 6.29 1.84"></path>
           </svg>

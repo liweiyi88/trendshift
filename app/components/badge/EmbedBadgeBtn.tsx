@@ -5,13 +5,16 @@ import { config } from '@/app/lib/config'
 
 interface Props {
   id: number
-  fullName: string
+  name: string
+  type: 'repository' | 'developer'
 }
 
-const EmbedBadgeBtn = ({ id, fullName }: Props) => {
+const EmbedBadgeBtn = ({ id, name: name, type }: Props) => {
   const [copied, setCopied] = useState(false)
 
   const opacity = copied ? 'opacity-100' : 'opacity-0'
+
+  const uri = type === 'repository' ? 'repositories' : 'developers'
 
   return (
     <>
@@ -19,10 +22,10 @@ const EmbedBadgeBtn = ({ id, fullName }: Props) => {
         onClick={() => {
           const embedCode = `<a href="${
             config.host
-          }/repositories/${id}" target="_blank"><img src="${
+          }/${uri}/${id}" target="_blank"><img src="${
             config.host
-          }/api/badge/repositories/${id}" alt="${encodeURIComponent(
-            fullName,
+          }/api/badge/${uri}/${id}" alt="${encodeURIComponent(
+            name,
           )} | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>`
           navigator.clipboard.writeText(embedCode)
 

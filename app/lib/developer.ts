@@ -53,3 +53,19 @@ export const getTrendingDevelopers = async (
 
   return res.json()
 }
+
+export const getDeveloper = async (id: number): Promise<Developer> => {
+  const query = `${config.apiHost}/api/developers/${id}`
+
+  const res = await fetch(query, {
+    method: 'GET',
+    credentials: 'include',
+    cache: 'no-store',
+  })
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`)
+  }
+
+  return res.json()
+}

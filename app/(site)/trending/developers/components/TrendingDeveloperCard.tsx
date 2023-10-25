@@ -17,7 +17,10 @@ const TrendingDeveloperCard = ({ developer, searchRange }: Props) => {
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="mb-2 flex items-start space-x-4">
         <div>
-          <Link href={`${routes.developers}/${developer.developer_id}`}>
+          <Link
+            href={`${routes.developers}/${developer.developer_id}`}
+            scroll={false}
+          >
             <Image
               src={developer.avatar_url}
               alt={developer.login}

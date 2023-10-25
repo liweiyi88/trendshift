@@ -66,7 +66,8 @@ const RepositoryDetail = ({ repository }: Props) => {
             </svg>
             <EmbedBadgeBtn
               id={repository.repository_id}
-              fullName={repository.full_name}
+              name={repository.full_name}
+              type="repository"
             />
           </div>
         </div>
