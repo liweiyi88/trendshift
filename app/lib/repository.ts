@@ -99,8 +99,8 @@ export const getRepository = async (id: number): Promise<Repository> => {
   return res.json()
 }
 
-export const getBestRanking = (repository: Repository): number => {
-  return repository.trendings.sort((a, b) => {
+export const getBestRanking = (trendings: Trending[]): number => {
+  return trendings.sort((a, b) => {
     if (a.rank === b.rank) {
       return 0
     }

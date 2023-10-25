@@ -1,9 +1,9 @@
-import { getLanguageColor } from '@/app/lib/config'
-import { Repository, getBestRanking } from '@/app/lib/repository'
+import { config, getLanguageColor, routes } from '@/app/lib/config'
+import { Repository } from '@/app/lib/repository'
 import React from 'react'
+import Image from 'next/image'
 import uEmojiParser from 'universal-emoji-parser'
 import TrendingLineChart from './TrendingLineChart'
-import Badge from '@/app/components/badge/Badge'
 import EmbedBadgeBtn from '@/app/components/badge/EmbedBadgeBtn'
 import VisitGithubLink from '@/app/components/trending/VisitGithubLink'
 
@@ -14,11 +14,9 @@ interface Props {
 const RepositoryDetail = ({ repository }: Props) => {
   const languageColor = getLanguageColor(repository.language)
 
-  const bestRanking = getBestRanking(repository)
-
   return (
     <>
-      <div className="flex items-center text-blue-400 text-lg justify-between mb-1">
+      <div className="flex items-center text-indigo-400 text-lg justify-between mb-1">
         <div>{repository.full_name}</div>
 
         {repository.language !== '' && (
@@ -36,7 +34,14 @@ const RepositoryDetail = ({ repository }: Props) => {
 
       <div className="mb-4">
         <div className="mb-2">
-          <Badge type="Repository" rank={bestRanking} />
+          <Image
+            width={250}
+            height={55}
+            src={`${config.host}${routes.repositoryBadge(
+              repository.repository_id,
+            )}`}
+            alt={repository.full_name}
+          />
         </div>
 
         <div className="text-xs mb-2 flex items-center font-medium text-yellow-700 space-x-4">

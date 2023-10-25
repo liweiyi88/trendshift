@@ -18,7 +18,7 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
     <div className="bg-white rounded-lg border border-gray-200 px-4 py-3">
       <div className="md:flex md:justify-between md:items-center text-sm md:text-base mb-1">
         <Link
-          className="text-blue-400 font-medium hover:underline max-w-[3/4] break-all"
+          className="text-indigo-400 font-medium hover:underline max-w-[3/4] break-all"
           href={`${routes.repositories}/${repository.repository_id}`}
           scroll={false}
         >

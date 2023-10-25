@@ -45,7 +45,7 @@ const Header = () => {
               </div>
             </div>
 
-            <div className="flex flex-1 max-w-4xl z-20 items-center mx-2 md:mx-12 justify-end md:justify-normal">
+            <div className="flex flex-1 max-w-4xl z-10 items-center mx-2 md:mx-12 justify-end md:justify-normal">
               <SearchButton />
             </div>
 

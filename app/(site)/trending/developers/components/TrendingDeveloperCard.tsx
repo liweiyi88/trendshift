@@ -30,7 +30,7 @@ const TrendingDeveloperCard = ({ developer, searchRange }: Props) => {
 
         <div>
           <Link
-            className="block text-blue-400 font-medium hover:underline max-w-[3/4] break-all text-xl"
+            className="block text-indigo-400 font-medium hover:underline max-w-[3/4] break-all text-xl"
             href={`${routes.developers}/${developer.developer_id}`}
             scroll={false}
           >

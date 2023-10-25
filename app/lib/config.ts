@@ -71,4 +71,5 @@ export const routes = {
   repositories: '/repositories',
   adminRepository: '/admin/repository',
   login: '/login',
+  repositoryBadge: (id: number) => `/api/badge/repositories/${id}`,
 }

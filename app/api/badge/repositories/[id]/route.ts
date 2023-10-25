@@ -5,7 +5,7 @@ export const GET = async (
   { params }: { params: { id: number } },
 ): Promise<Response> => {
   const repository = await getRepository(params.id)
-  const bestRanking = getBestRanking(repository)
+  const bestRanking = getBestRanking(repository.trendings)
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 53" width="250" height="55" data-date-format="longDate">
