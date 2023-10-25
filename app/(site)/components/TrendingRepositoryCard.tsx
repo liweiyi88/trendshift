@@ -5,26 +5,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import Language from '@/app/components/Language'
+import VisitGithubLink from '@/app/components/trending/VisitGithubLink'
+import FeaturedMessage from '@/app/components/trending/FeaturedMessage'
 
 interface Props {
   repository: Repository
   searchRange?: number
-}
-
-export const period = (searchRange?: number): string => {
-  if (!searchRange) {
-    return 'of all days.'
-  }
-
-  if (searchRange === 1) {
-    return 'of today.'
-  }
-
-  if (searchRange === 360) {
-    return 'over past a year.'
-  }
-
-  return `over past ${searchRange} days.`
 }
 
 const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
@@ -52,28 +38,7 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
           </div>
         )}
         <div className="flex text-xs items-center font-medium text-yellow-700 mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-3 h-3 mr-1"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-            />
-          </svg>
-          <Link
-            className="underline hover:cursor-pointer"
-            href={`https://github.com/${repository.full_name}`}
-            target="_blank"
-            scroll={true}
-          >
-            Visit GitHub
-          </Link>
+          <VisitGithubLink uri={repository.full_name} />
         </div>
       </div>
 
@@ -91,13 +56,11 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
             className="rounded-full"
           />
         </Link>
-        <div className="text-sm text-gray-500">
-          Featured on GitHub Trending{' '}
-          <span className="text-indigo-600 font-semibold relative group">
-            {repository.featured_count}
-          </span>{' '}
-          times {period(searchRange)}
-        </div>
+
+        <FeaturedMessage
+          featuredCount={repository.featured_count}
+          searchRange={searchRange}
+        />
       </div>
 
       <div className="text-gray-500 text-xs">

@@ -1,11 +1,11 @@
 import { getLanguageColor } from '@/app/lib/config'
 import { Repository, getBestRanking } from '@/app/lib/repository'
-import Link from 'next/link'
 import React from 'react'
 import uEmojiParser from 'universal-emoji-parser'
 import TrendingLineChart from './TrendingLineChart'
 import Badge from '@/app/components/badge/Badge'
 import EmbedBadgeBtn from '@/app/components/badge/EmbedBadgeBtn'
+import VisitGithubLink from '@/app/components/trending/VisitGithubLink'
 
 interface Props {
   repository: Repository
@@ -41,29 +41,7 @@ const RepositoryDetail = ({ repository }: Props) => {
 
         <div className="text-xs mb-2 flex items-center font-medium text-yellow-700 space-x-4">
           <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-3 h-3 mr-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-              />
-            </svg>
-
-            <Link
-              className="hover:cursor-pointer hover:underline"
-              href={`https://github.com/${repository.full_name}`}
-              target="_blank"
-              scroll={true}
-            >
-              Visit GitHub
-            </Link>
+            <VisitGithubLink uri={repository.full_name} />
           </div>
 
           <div className="flex items-center">
