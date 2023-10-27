@@ -1,11 +1,11 @@
 import { Repository } from '@/app/lib/repository'
 import React from 'react'
 import TrendingRepositoryCard from './TrendingRepositoryCard'
-import TrendingRepositoryFilters from './TrendingRepositoryFilters'
 import { BackTop } from '@/app/components/BackTop'
 import LanguagePercentWidget from '@/app/components/widgets/LanguagePercentWidget'
 import Notice from '@/app/components/Notice'
 import dayjs from 'dayjs'
+import TrendingFilters from '@/app/components/trending/TrendingFilters'
 
 interface Props {
   repositories?: Repository[] // repositories could be null if today's data is not ready.
@@ -31,9 +31,8 @@ const TrendingRepositoryList = ({
         <div className="md:pr-2 text-base font-medium mb-1 md:mb-0">
           Trending repositories
         </div>
-        <div>
-          <TrendingRepositoryFilters />
-        </div>
+
+        <TrendingFilters />
       </div>
 
       {!searchLanguage && repositories && (

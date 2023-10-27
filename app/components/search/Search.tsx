@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import RepositoryResults from './RepositoryResults'
+import SearchResults from './SearchResults'
 import { SearchResult, search } from '@/app/lib/search'
 
 interface Props {
@@ -18,13 +18,22 @@ const debounce = (func: (query: string | undefined) => void, wait: number) => {
 }
 
 const Search = ({ onClose }: Props) => {
-  const [results, setResults] = useState<SearchResult[] | null>(null)
+  const [results, setResults] = useState<SearchResult | null>(null)
+  const [emptyQuery, setEmptyQuery] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const repositories = results?.map((result) => {
+  const repositories = results?.repositories?.map((result) => {
     return {
       id: Number(result.objectID),
       fullName: result.full_name,
+    }
+  })
+
+  const developers = results?.developers?.map((result) => {
+    return {
+      id: Number(result.objectID),
+      username: result.username,
     }
   })
 
@@ -40,12 +49,12 @@ const Search = ({ onClose }: Props) => {
     }
   }, [])
 
-  console.log(error)
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((inputVal: string | undefined) => {
       if (inputVal) {
+        setLoading(true)
+        setEmptyQuery(false)
         search(inputVal)
           .then((data) => {
             setResults(data)
@@ -55,18 +64,23 @@ const Search = ({ onClose }: Props) => {
             console.error(e)
             setError(e)
           })
+          .finally(() => {
+            setLoading(false)
+          })
+      } else {
+        setEmptyQuery(true)
       }
     }, 250),
     [],
   )
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-0">
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-      <div className="fixed inset-x-0 z-10 w-screen">
+      <div className="fixed inset-x-0 inset-y-0 md:inset-y-1 z-10 w-screen">
         <div className="flex justify-center text-center items-center">
-          <div className="bg-white relative transform overflow-auto rounded text-left shadow-xl transition-all w-full sm:max-w-4xl p-6">
+          <div className="bg-gray-50 relative transform overflow-auto md:rounded text-left shadow-xl transition-all w-full sm:max-w-4xl p-6 h-screen md:h-auto">
             <div className="relative rounded-md shadow-sm">
               <div className="flex justify-end mb-3">
                 <button
@@ -101,7 +115,7 @@ const Search = ({ onClose }: Props) => {
                   name="search"
                   id="search"
                   className="block w-full rounded-md border-0 py-4 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
-                  placeholder="Search repositories..."
+                  placeholder="Search..."
                 />
               </div>
             </div>
@@ -112,8 +126,13 @@ const Search = ({ onClose }: Props) => {
               </div>
             )}
 
-            <div className="mt-8 pt-8 border-t text-sm text-gray-700 h-[450px] pb-12">
-              <RepositoryResults repositories={repositories} />
+            <div className="mt-8 pt-8 border-t text-sm text-gray-700 h-[500px] pb-12">
+              <SearchResults
+                isLoading={loading}
+                isEmptyQuery={emptyQuery}
+                repositories={repositories}
+                developers={developers}
+              />
             </div>
           </div>
         </div>

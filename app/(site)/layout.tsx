@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from '../components/Container'
-import Header from '../components/Header'
+import Header from '../components/header/Header'
 import Footer from '../components/Footer'
 
 interface Props {
@@ -11,7 +11,9 @@ interface Props {
 const SiteLayout = ({ modal, children }: Props) => {
   return (
     <>
-      <Header />
+      <div className="border-b-gray-200 border-b md:border-none">
+        <Header />
+      </div>
       {modal}
       <Container className="bg-gray-50/40 pt-6 pb-6 md:pb-24 min-h-screen">
         {children}

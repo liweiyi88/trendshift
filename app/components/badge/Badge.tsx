@@ -5,6 +5,7 @@ interface Props {
   type: 'Repository' | 'Developer'
 }
 
+// not in use at this stage, will remove later.
 const Badge = ({ rank, type }: Props) => {
   return (
     <svg

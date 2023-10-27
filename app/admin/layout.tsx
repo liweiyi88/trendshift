@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import Login from '../login/page'
 import { config } from '../lib/config'
 import { Metadata } from 'next'
-import Header from '../components/Header'
+import Header from '../components/header/Header'
 import Container from '../components/Container'
 
 export const metadata: Metadata = {

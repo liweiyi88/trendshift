@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 
-const TrendingRepositoryFilters = () => {
+const TrendingFilters = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -93,4 +93,4 @@ const TrendingRepositoryFilters = () => {
   )
 }
 
-export default TrendingRepositoryFilters
+export default TrendingFilters
