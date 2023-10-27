@@ -54,7 +54,7 @@ const Header = () => {
             {!path.startsWith(routes.adminRepository) && (
               <Link
                 href={routes.adminRepository}
-                className="hidden md:block z-10 px-4 py-2 bg-indigo-700 rounded text-white text-sm"
+                className="hidden md:block z-0 px-4 py-2 bg-indigo-700 rounded text-white text-sm"
               >
                 Login
               </Link>
