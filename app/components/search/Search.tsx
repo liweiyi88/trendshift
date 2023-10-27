@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import RepositoryResults from './RepositoryResults'
+import SearchResults from './SearchResults'
 import { SearchResult, search } from '@/app/lib/search'
 
 interface Props {
@@ -18,13 +18,22 @@ const debounce = (func: (query: string | undefined) => void, wait: number) => {
 }
 
 const Search = ({ onClose }: Props) => {
-  const [results, setResults] = useState<SearchResult[] | null>(null)
+  const [results, setResults] = useState<SearchResult | null>(null)
+  const [emptyQuery, setEmptyQuery] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const repositories = results?.map((result) => {
+  const repositories = results?.repositories?.map((result) => {
     return {
       id: Number(result.objectID),
       fullName: result.full_name,
+    }
+  })
+
+  const developers = results?.developers?.map((result) => {
+    return {
+      id: Number(result.objectID),
+      username: result.username,
     }
   })
 
@@ -44,6 +53,8 @@ const Search = ({ onClose }: Props) => {
   const handleSearch = useCallback(
     debounce((inputVal: string | undefined) => {
       if (inputVal) {
+        setLoading(true)
+        setEmptyQuery(false)
         search(inputVal)
           .then((data) => {
             setResults(data)
@@ -53,6 +64,11 @@ const Search = ({ onClose }: Props) => {
             console.error(e)
             setError(e)
           })
+          .finally(() => {
+            setLoading(false)
+          })
+      } else {
+        setEmptyQuery(true)
       }
     }, 250),
     [],
@@ -99,7 +115,7 @@ const Search = ({ onClose }: Props) => {
                   name="search"
                   id="search"
                   className="block w-full rounded-md border-0 py-4 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
-                  placeholder="Search repositories..."
+                  placeholder="Search..."
                 />
               </div>
             </div>
@@ -110,8 +126,13 @@ const Search = ({ onClose }: Props) => {
               </div>
             )}
 
-            <div className="mt-8 pt-8 border-t text-sm text-gray-700 h-[450px] pb-12">
-              <RepositoryResults repositories={repositories} />
+            <div className="mt-8 pt-8 border-t text-sm text-gray-700 h-[500px] pb-12">
+              <SearchResults
+                isLoading={loading}
+                isEmptyQuery={emptyQuery}
+                repositories={repositories}
+                developers={developers}
+              />
             </div>
           </div>
         </div>
