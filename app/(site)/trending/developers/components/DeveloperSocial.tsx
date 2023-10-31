@@ -107,7 +107,11 @@ const DeveloperSocial = ({ developer }: Props) => {
             />
           </svg>
 
-          <Link href={blogLink(developer.blog)} className="hover:underline">
+          <Link
+            href={blogLink(developer.blog)}
+            target="_blank"
+            className="hover:underline"
+          >
             {developer.blog}
           </Link>
         </div>
@@ -124,6 +128,7 @@ const DeveloperSocial = ({ developer }: Props) => {
           <Link
             href={`https://twitter.com/${developer.twitter_username}`}
             className="hover:underline"
+            target="_blank"
           >
             {developer.twitter_username}
           </Link>

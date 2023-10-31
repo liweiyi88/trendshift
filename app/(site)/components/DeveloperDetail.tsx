@@ -15,12 +15,21 @@ interface Props {
 const DeveloperDetail = ({ developer }: Props) => {
   return (
     <>
-      <div className="mb-2">
-        <div className="text-indigo-400 text-lg">{developer.login}</div>
+      <div className="mb-2 flex items-start space-x-4">
+        <Image
+          src={developer.avatar_url}
+          alt={developer.login}
+          width={50}
+          height={50}
+          className="rounded-full border-4 border-indigo-600 h-18 w-18 text-base md:text-base mb-2"
+        />
+        <div>
+          <div className="text-indigo-400 text-lg">{developer.login}</div>
 
-        {developer.name && developer.name !== '' && (
-          <div className="text-gray-400">{developer.name}</div>
-        )}
+          {developer.name && developer.name !== '' && (
+            <div className="text-gray-400">{developer.name}</div>
+          )}
+        </div>
       </div>
 
       <div className="mb-4">
