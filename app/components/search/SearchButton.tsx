@@ -9,7 +9,6 @@ const SearchButton = () => {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      console.log(e)
       if (e.metaKey && e.key === 'k') {
         e.preventDefault()
         e.stopPropagation()
