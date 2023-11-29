@@ -1,53 +1,54 @@
 'use client'
 
 import React from 'react'
+import { SVGMotionProps, motion } from 'framer-motion'
 
 interface Props {
-  open: boolean
-  onClick: () => void
+  toggle: () => void
 }
 
-const MobileNavToggle = ({ open, onClick }: Props) => {
+const Path = (props: SVGMotionProps<SVGPathElement>) => (
+  <motion.path
+    fill="transparent"
+    strokeWidth="3"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    {...props}
+  />
+)
+
+const MobileNavToggle = ({ toggle }: Props) => {
   return (
-    <>
-      <div className="flex items-center md:hidden">
-        <button
-          onClick={onClick}
-          type="button"
-          className="text-sm relative inline-flex items-center justify-center border border-gray-300 rounded p-2 text-gray-500 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-        >
-          <span className="absolute -inset-0.5"></span>
-          <svg
-            className={`h-4 w-4 ${!open ? 'block' : 'hidden'}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            ></path>
-          </svg>
-          <svg
-            className={`h-4 w-4 ${open ? 'block' : 'hidden'}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      </div>
-    </>
+    <button
+      onClick={toggle}
+      className="flex items-center md:hidden text-gray-500 border border-gray-300 bg-gray-50  p-2 text-sm rounded"
+    >
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="current">
+        <Path
+          strokeWidth={1}
+          variants={{
+            closed: { d: 'M 2 2.5 L 20 2.5' },
+            open: { d: 'M 3 16.5 L 17 2.5' },
+          }}
+        />
+        <Path
+          strokeWidth={1}
+          d="M 2 9.423 L 20 9.423"
+          variants={{
+            closed: { opacity: 1 },
+            open: { opacity: 0 },
+          }}
+          transition={{ duration: 0.1 }}
+        />
+        <Path
+          strokeWidth={1}
+          variants={{
+            closed: { d: 'M 2 16.346 L 20 16.346' },
+            open: { d: 'M 3 2.5 L 17 16.346' },
+          }}
+        />
+      </svg>
+    </button>
   )
 }
 
