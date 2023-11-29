@@ -1,6 +1,7 @@
 import './globals.css'
 import '@fortawesome/fontawesome-svg-core/styles.css' // has to import the css to resolve the large icon when first load.
 import Script from 'next/script'
+import { Providers } from './providers'
 
 export default function RootLayout({
   children,
@@ -10,7 +11,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Layout>{children}</Layout>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   )
