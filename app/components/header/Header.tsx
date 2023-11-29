@@ -12,11 +12,6 @@ import Navbar, { NavItem } from './Navbar'
 import MobileNavbar from './MobileNavbar'
 import { motion } from 'framer-motion'
 
-const MobileNavVariants = {
-  open: { opacity: 1, x: 0, height: 'auto' },
-  closed: { opacity: 0, height: 0 },
-}
-
 const Header = () => {
   const [open, setOpen] = useState(false)
   const path = usePathname()
@@ -76,14 +71,11 @@ const Header = () => {
           </Container>
         </div>
 
-        <motion.nav
-          transition={{ ease: [0.3, 0.3, 0.3, 0.3], duration: 0.2 }}
-          initial={false}
-          animate={open ? 'open' : 'closed'}
-          variants={MobileNavVariants}
-        >
-          <MobileNavbar items={navItems} onClick={onMobileViewToggle} />
-        </motion.nav>
+        <MobileNavbar
+          open={open}
+          items={navItems}
+          onClick={onMobileViewToggle}
+        />
       </nav>
     </>
   )

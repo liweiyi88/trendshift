@@ -3,15 +3,28 @@ import { NavItem } from './Navbar'
 import Link from 'next/link'
 import classNames from 'classnames'
 import { routes } from '@/app/lib/config'
+import { motion } from 'framer-motion'
 
 interface Props {
+  open: boolean
   items: NavItem[]
   onClick: () => void
 }
 
-const MobileNavbar = ({ items, onClick }: Props) => {
+const variants = {
+  open: { display: 'block', opacity: 1, x: 0, height: 'auto' },
+  closed: { opacity: 0, height: 0, transitionEnd: { display: 'none' } },
+}
+
+const MobileNavbar = ({ open, items, onClick }: Props) => {
   return (
-    <div className="md:hidden" aria-label="Global" id="mobile-menu">
+    <motion.div
+      className="flex flex-col"
+      transition={{ ease: [0.3, 0.3, 0.3, 0.3], duration: 0.3 }}
+      initial={false}
+      animate={open ? 'open' : 'closed'}
+      variants={variants}
+    >
       <div className="space-y-1 px-2 pb-3 pt-2">
         {items.map((item, index) => {
           return (
@@ -35,7 +48,7 @@ const MobileNavbar = ({ items, onClick }: Props) => {
       >
         Login
       </Link>
-    </div>
+    </motion.div>
   )
 }
 
