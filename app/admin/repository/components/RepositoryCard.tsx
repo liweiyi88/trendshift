@@ -268,6 +268,8 @@ const RepositoryCard = ({ repository }: Props) => {
                 },
               })}
               styles={{
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 control: (baseStyles, state) => ({
                   ...baseStyles,
                   fontSize: '12px',
@@ -277,29 +279,41 @@ const RepositoryCard = ({ repository }: Props) => {
                   borderSize: state.isFocused ? '1px' : '1px',
                   boxShadow: 'none',
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 valueContainer: (baseStyles) => ({
                   ...baseStyles,
                   padding: '0',
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 multiValue: (baseStyles) => ({
                   ...baseStyles,
                   fontSize: '12px',
                   padding: '0 3px 0 3px',
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 menu: (baseStyles) => ({
                   ...baseStyles,
                   fontSize: '12px',
                   borderRadius: 0,
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 multiValueLabel: (baseStyles) => ({
                   ...baseStyles,
                   padding: '2px 0 2px 0',
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 dropdownIndicator: (baseStyles) => ({
                   ...baseStyles,
                   paddingTop: 6,
                   paddingBottom: 6,
                 }),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
                 clearIndicator: (baseStyles) => ({
                   ...baseStyles,
                   paddingTop: 6,
