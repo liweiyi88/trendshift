@@ -7,6 +7,8 @@ import React from 'react'
 import Language from '@/app/components/Language'
 import VisitGithubLink from '@/app/components/trending/VisitGithubLink'
 import FeaturedMessage from '@/app/components/trending/FeaturedMessage'
+import RepositoryWebsiteLink from '@/app/components/trending/RepositoryWebsiteLink'
+import StarsForks from '@/app/components/trending/StarsForks'
 
 interface Props {
   repository: Repository
@@ -31,15 +33,24 @@ const TrendingRepositoryCard = ({ repository, searchRange }: Props) => {
         )}
       </div>
 
-      <div className="flex">
+      <div className="mb-2">
+        <StarsForks repository={repository} />
+      </div>
+
+      <div className="flex mb-4">
         {repository.language !== '' && (
-          <div className="md:hidden mr-1">
+          <div className="md:hidden mr-2">
             <Language language={repository.language} />
           </div>
         )}
-        <div className="flex text-xs items-center font-medium text-yellow-700 mb-4">
+        <div className="flex text-xs items-center font-medium text-yellow-700 mr-2">
           <VisitGithubLink uri={repository.full_name} />
         </div>
+        {repository.homepage && repository.homepage !== '' && (
+          <div className="flex text-xs items-center font-medium text-yellow-700">
+            <RepositoryWebsiteLink url={repository.homepage} />
+          </div>
+        )}
       </div>
 
       <div className="flex items-center border-b pb-4 mb-4">

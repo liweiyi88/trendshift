@@ -21,9 +21,10 @@ export interface Repository {
   }
   trendings: Trending[]
   forks: number
-  watchers: number
+  watchers: number // the stars number
   language: string
   tags: Tag[]
+  homepage?: string
   created_at: string
   updated_at: string
 }

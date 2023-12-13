@@ -18,7 +18,7 @@ const TrendingDeveloperList = ({ developers, searchRange }: Props) => {
         <Notice
           text={`GitHub trending developers data is fetched since ${dayjs(
             '2023-10-16',
-          ).format('D MMM, YYYY')}.`}
+          ).format('D MMM, YYYY')}. Developers details are updated weekly.`}
         />
       </div>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">

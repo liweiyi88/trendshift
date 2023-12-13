@@ -24,7 +24,9 @@ const TrendingRepositoryList = ({
         <Notice
           text={`GitHub trending repositories data is fetched since ${dayjs(
             '2023-09-08',
-          ).format('D MMM, YYYY')}.`}
+          ).format(
+            'D MMM, YYYY',
+          )}. Repsitories details (e.g. stars, forks and website) are updated weekly.`}
         />
       </div>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">

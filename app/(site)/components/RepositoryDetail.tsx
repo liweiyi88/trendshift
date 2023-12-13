@@ -6,6 +6,8 @@ import uEmojiParser from 'universal-emoji-parser'
 import TrendingLineChart from './TrendingLineChart'
 import EmbedBadgeBtn from '@/app/components/badge/EmbedBadgeBtn'
 import VisitGithubLink from '@/app/components/trending/VisitGithubLink'
+import RepositoryWebsiteLink from '@/app/components/trending/RepositoryWebsiteLink'
+import StarsForks from '@/app/components/trending/StarsForks'
 
 interface Props {
   repository: Repository
@@ -32,6 +34,10 @@ const RepositoryDetail = ({ repository }: Props) => {
         )}
       </div>
 
+      <div className="mb-2">
+        <StarsForks repository={repository} />
+      </div>
+
       <div className="mb-4">
         <div className="mb-2">
           <Image
@@ -44,10 +50,16 @@ const RepositoryDetail = ({ repository }: Props) => {
           />
         </div>
 
-        <div className="text-xs mb-2 flex items-center font-medium text-yellow-700 space-x-4">
+        <div className="text-xs mb-2 flex items-center font-medium text-yellow-700 space-x-3">
           <div className="flex items-center">
             <VisitGithubLink uri={repository.full_name} />
           </div>
+
+          {repository.homepage && repository.homepage != '' && (
+            <div className="flex items-center">
+              <RepositoryWebsiteLink url={repository.homepage} />
+            </div>
+          )}
 
           <div className="flex items-center">
             <svg
