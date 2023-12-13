@@ -11,7 +11,7 @@ const Language = ({ language }: Props) => {
   return (
     <div className="text-gray-500 flex items-center text-xs md:text-sm">
       <span
-        className="w-2 h-2 md:w-3 md:h-3 rounded-full mr-1 shrink-0"
+        className="w-[12px] h-[12px] md:w-3 md:h-3 rounded-full mr-1 shrink-0"
         style={{
           backgroundColor: languageColor,
         }}
