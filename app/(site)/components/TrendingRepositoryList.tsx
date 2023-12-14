@@ -26,7 +26,7 @@ const TrendingRepositoryList = ({
             '2023-09-08',
           ).format(
             'D MMM, YYYY',
-          )}. Repsitories details (e.g. stars, forks and website) are updated weekly.`}
+          )}. Repsitories details (e.g. stars, forks and website) are updated every 48 hours.`}
         />
       </div>
       <div className="block md:flex items-center text-base w-auto rounded mb-3">
