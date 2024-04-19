@@ -73,6 +73,7 @@ const TrendingFilters = () => {
         <option value="rust">Rust</option>
         <option value="c">C</option>
         <option value="c++">C++</option>
+        <option value="dart">Dart</option>
       </select>
 
       <select

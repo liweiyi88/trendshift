@@ -14,6 +14,10 @@ export const getLanguageColor = (language: string): string => {
       return '#dea584'
     }
 
+    case 'Dart': {
+      return '#00B4AB'
+    }
+
     case 'Ruby': {
       return '#701516'
     }
