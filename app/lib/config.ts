@@ -62,6 +62,10 @@ export const getLanguageColor = (language: string): string => {
       return '#178600'
     }
 
+    case 'Swift': {
+      return '#f05138'
+    }
+
     default: {
       return '#DA5B0B'
     }
